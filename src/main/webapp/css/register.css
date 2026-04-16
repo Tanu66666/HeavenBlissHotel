@@ -1,1 +1,275 @@
 @charset "UTF-8";
+
+/* ===== RESET ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== PAGE WRAPPER ===== */
+.page-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #1a1208;
+    background-image: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 60%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    font-family: Arial, sans-serif;
+    padding: 100px 20px 60px;
+}
+
+/* ===== BACKGROUND OVERLAY ===== */
+.bg-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(201,168,76,0.03) 0px, rgba(201,168,76,0.03) 1px, transparent 1px, transparent 20px);
+    pointer-events: none;
+}
+
+/* ===== HOTEL HEADER ===== */
+.hotel-header {
+    position: absolute;
+    top: 32px;
+    text-align: center;
+    width: 100%;
+}
+
+.hotel-header h1 {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: #f5efe0;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+}
+
+.hotel-header p {
+    font-size: 11px;
+    color: #c9a84c;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+/* ===== REGISTER CARD ===== */
+.register-card {
+    background: rgba(245, 239, 224, 0.97);
+    border-radius: 4px;
+    padding: 44px 48px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== CARD HEADING ===== */
+.card-label {
+    font-size: 11px;
+    color: #8b7355;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.card-title {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #2d1f0e;
+    margin-bottom: 10px;
+}
+
+.gold-bar {
+    width: 40px;
+    height: 2px;
+    background-color: #c9a84c;
+    margin-bottom: 28px;
+}
+
+/* ===== MESSAGES ===== */
+.msg {
+    padding: 12px 16px;
+    border-radius: 3px;
+    font-size: 13px;
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.msg-success {
+    background-color: #eaf3de;
+    color: #27500a;
+    border-left: 3px solid #639922;
+}
+
+.msg-error {
+    background-color: #fcebeb;
+    color: #791f1f;
+    border-left: 3px solid #e24b4a;
+}
+
+/* ===== FORM FIELDS ===== */
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 11px;
+    color: #8b7355;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 13px;
+    font-size: 15px;
+    color: #8b7355;
+    pointer-events: none;
+}
+
+.input-wrap input {
+    width: 100%;
+    padding: 13px 13px 13px 40px;
+    border: 1px solid #d4c4a8;
+    border-radius: 3px;
+    background-color: #faf8f3;
+    font-size: 14px;
+    color: #2d1f0e;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-wrap input:focus {
+    border-color: #c9a84c;
+    background-color: #ffffff;
+}
+
+.input-wrap input::placeholder {
+    color: #b8a88a;
+}
+
+/* ===== EYE BUTTON ===== */
+.eye-btn {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: #8b7355;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.eye-btn:hover {
+    color: #3d2008;
+}
+
+/* ===== REGISTER BUTTON ===== */
+.btn-register {
+    width: 100%;
+    padding: 15px;
+    background-color: #3d2008;
+    color: #f5efe0;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.25s;
+    margin-top: 10px;
+    margin-bottom: 22px;
+}
+
+.btn-register:hover {
+    background-color: #c9a84c;
+    color: #2d1f0e;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+    text-align: center;
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 42%;
+    height: 0.5px;
+    background-color: #d4c4a8;
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.divider span {
+    font-size: 11px;
+    color: #b8a88a;
+    background: rgba(245,239,224,0.97);
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== LOGIN LINK ===== */
+.login-text {
+    text-align: center;
+    font-size: 13px;
+    color: #6b5a3e;
+}
+
+.login-text a {
+    color: #3d2008;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid #c9a84c;
+    padding-bottom: 1px;
+    transition: color 0.2s;
+}
+
+.login-text a:hover {
+    color: #c9a84c;
+}
+
+/* ===== FOOTER ===== */
+.page-footer {
+    position: absolute;
+    bottom: 16px;
+    font-size: 11px;
+    color: rgba(201,168,76,0.45);
+    text-align: center;
+    width: 100%;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .register-card {
+        padding: 30px 25px;
+        margin: 0 15px;
+    }
+    
+    .hotel-header h1 {
+        font-size: 22px;
+    }
+    
+    .card-title {
+        font-size: 20px;
+    }
+}
