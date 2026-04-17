@@ -62,7 +62,7 @@
                 <div class="input-wrap">
                     <span class="input-icon">&#128274;</span>
                     <input type="password" id="password" name="password"
-                           placeholder="••••••••" required>
+                           placeholder="********" required>
                     <button type="button" class="eye-btn"
                             onclick="togglePassword()">&#128065;</button>
                 </div>
@@ -73,12 +73,11 @@
                 <label class="remember-label">
                     <input type="checkbox" name="remember" ${rememberChecked ? 'checked' : ''}> Remember device
                 </label>
-                <a href="${pageContext.request.contextPath}/forgotpassword"
-                   class="forgot-link">Forgot Password?</a>
+                <a href="${pageContext.request.contextPath}/forgotpassword" class="forgot-link">Forgot Password?</a>
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn-login">Authenticate Account</button>
+            <button type="submit" class="btn-login">login</button>
 
         </form>
 

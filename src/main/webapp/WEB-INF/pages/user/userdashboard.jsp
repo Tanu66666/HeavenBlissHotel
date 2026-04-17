@@ -21,22 +21,22 @@
         
         <nav class="sidebar-nav">
             <a href="${pageContext.request.contextPath}/user/dashboard" class="nav-link active">
-                <span>📊</span> Dashboard
+                Dashboard
             </a>
             <a href="${pageContext.request.contextPath}/user/bookings" class="nav-link">
-                <span>📅</span> My Bookings
+                My Bookings
             </a>
             <a href="${pageContext.request.contextPath}/user/profile" class="nav-link">
-                <span>👤</span> My Profile
+                My Profile
             </a>
             <a href="${pageContext.request.contextPath}/user/rooms" class="nav-link">
-                <span>🛏️</span> Browse Rooms
+                Browse Rooms
             </a>
         </nav>
         
         <div class="sidebar-footer">
             <a href="${pageContext.request.contextPath}/logout" class="logout-btn">
-                <span>🚪</span> Logout
+        		 Logout
             </a>
         </div>
     </div>
@@ -55,7 +55,6 @@
         <!-- Stats Cards -->
         <div class="stats-cards">
             <div class="stat-card">
-                <div class="stat-icon">📅</div>
                 <div class="stat-info">
                     <h3>${totalBookings}</h3>
                     <p>Total Bookings</p>
@@ -63,7 +62,6 @@
             </div>
             
             <div class="stat-card">
-                <div class="stat-icon">⏳</div>
                 <div class="stat-info">
                     <h3>${upcomingBookings}</h3>
                     <p>Upcoming Stays</p>
@@ -71,7 +69,6 @@
             </div>
             
             <div class="stat-card">
-                <div class="stat-icon">✅</div>
                 <div class="stat-info">
                     <h3>${completedBookings}</h3>
                     <p>Completed Stays</p>

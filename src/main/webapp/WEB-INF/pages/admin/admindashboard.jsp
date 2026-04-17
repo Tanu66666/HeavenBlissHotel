@@ -21,22 +21,22 @@
         
         <nav class="sidebar-nav">
             <a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link active">
-                <span>📊</span> Dashboard
+                 Dashboard
             </a>
             <a href="${pageContext.request.contextPath}/admin/rooms" class="nav-link">
-                <span>🛏️</span> Rooms
+                 Rooms
             </a>
             <a href="${pageContext.request.contextPath}/admin/users" class="nav-link">
-                <span>👥</span> Users
+                 Users
             </a>
             <a href="${pageContext.request.contextPath}/admin/bookings" class="nav-link">
-                <span>📅</span> Bookings
+                 Bookings
             </a>
         </nav>
         
         <div class="sidebar-footer">
             <a href="${pageContext.request.contextPath}/logout" class="logout-btn">
-                <span>🚪</span> Logout
+                Logout
             </a>
         </div>
     </div>
@@ -55,7 +55,6 @@
         <!-- Stats Cards -->
         <div class="stats-cards">
             <div class="card">
-                <div class="card-icon">🛏️</div>
                 <div class="card-info">
                     <h3>${totalRooms}</h3>
                     <p>Total Rooms</p>
@@ -64,7 +63,6 @@
             </div>
             
             <div class="card">
-                <div class="card-icon">📅</div>
                 <div class="card-info">
                     <h3>${totalBookings}</h3>
                     <p>Total Bookings</p>
@@ -73,7 +71,6 @@
             </div>
             
             <div class="card">
-                <div class="card-icon">👥</div>
                 <div class="card-info">
                     <h3>${totalUsers}</h3>
                     <p>Total Guests</p>
@@ -82,7 +79,6 @@
             </div>
             
             <div class="card">
-                <div class="card-icon">💰</div>
                 <div class="card-info">
                     <h3>रु ${totalRevenue}</h3>
                     <p>Total Revenue</p>

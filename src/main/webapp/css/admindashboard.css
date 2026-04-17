@@ -76,18 +76,23 @@ body {
 .sidebar-footer {
     padding: 20px;
     border-top: 1px solid #3d2a14;
+    margin-top: auto;
+    text-align: center;
 }
 
 .logout-btn {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 10px;
     padding: 12px 15px;
     background: #8b0000;
     color: white;
     text-decoration: none;
     border-radius: 8px;
     transition: background 0.3s;
+    width: 100%;
+    text-align: center;
 }
 
 .logout-btn:hover {
@@ -144,10 +149,6 @@ body {
 
 .card:hover {
     transform: translateY(-3px);
-}
-
-.card-icon {
-    font-size: 40px;
 }
 
 .card-info h3 {
