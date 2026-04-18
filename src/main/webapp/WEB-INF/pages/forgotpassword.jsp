@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,22 +23,22 @@
         <h2 class="card-title">Forgot Password</h2>
         <div class="gold-bar"></div>
 
-        <%-- Error Message --%>
-        <% if (request.getAttribute("error") != null) { %>
-            <div class="msg msg-error">
-                <%= request.getAttribute("error") %>
-            </div>
-        <% } %>
-
-        <%-- Success Message --%>
-        <% if (request.getAttribute("success") != null) { %>
-            <div class="msg msg-success">
-                <%= request.getAttribute("success") %>
-            </div>
-        <% } %>
+        <%-- ERROR MESSAGE --%>
+		<c:if test="${not empty error}">
+		    <div class="msg msg-error">
+		        ${error}
+		    </div>
+		</c:if>
+		
+		<%-- SUCCESS MESSAGE --%>
+		<c:if test="${not empty success}">
+		    <div class="msg msg-success">
+		        ${success}
+		    </div>
+		</c:if>
 
         <%-- Step 1: Show email input (if security question not shown) --%>
-        <% if (request.getAttribute("showQuestion") == null || !(Boolean) request.getAttribute("showQuestion")) { %>
+        <c:if test="${empty showQuestion or not showQuestion}">
             <form action="${pageContext.request.contextPath}/forgotpassword" method="post">
                 <input type="hidden" name="step" value="checkEmail">
                 
@@ -52,18 +53,18 @@
                 
                 <button type="submit" class="btn-reset">Verify Email →</button>
             </form>
-        <% } %>
+        </c:if>
 
         <%-- Step 2: Show security question and password reset form --%>
-        <% if (request.getAttribute("showQuestion") != null && (Boolean) request.getAttribute("showQuestion")) { %>
+        <c:if test="${not empty showQuestion and showQuestion}">
             <form action="${pageContext.request.contextPath}/forgotpassword" method="post">
                 <input type="hidden" name="step" value="resetPassword">
                 
                 <div class="form-field">
                     <label>Security Question</label>
                     <div class="question-box">
-                        <%= request.getAttribute("securityQuestion") %>
-                    </div>
+					    ${securityQuestion}
+					</div>
                 </div>
                 
                 <div class="form-field">
@@ -95,7 +96,7 @@
                 
                 <button type="submit" class="btn-reset">Reset Password →</button>
             </form>
-        <% } %>
+        </c:if>
 
         <div class="divider"><span>or</span></div>
 

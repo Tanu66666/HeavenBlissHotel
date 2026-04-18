@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,19 +25,19 @@
         <h2 class="card-title">Register Your Account</h2>
         <div class="gold-bar"></div>
 
-        <!-- Success Message -->
-        <% if (request.getAttribute("success") != null) { %>
-            <div class="msg msg-success">
-                <%= request.getAttribute("success") %>
-            </div>
-        <% } %>
-
-        <!-- Error Message -->
-        <% if (request.getAttribute("error") != null) { %>
-            <div class="msg msg-error">
-                <%= request.getAttribute("error") %>
-            </div>
-        <% } %>
+        <%-- SUCCESS MESSAGE --%>
+		<c:if test="${not empty success}">
+		    <div class="msg msg-success">
+		        ${success}
+		    </div>
+		</c:if>
+		
+		<%-- ERROR MESSAGE --%>
+		<c:if test="${not empty error}">
+		    <div class="msg msg-error">
+		        ${error}
+		    </div>
+		</c:if>
 
         <!-- Registration Form -->
         <form action="${pageContext.request.contextPath}/register" method="post">

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +36,7 @@
         
         <div class="sidebar-footer">
             <a href="${pageContext.request.contextPath}/logout" class="logout-btn">
-        		 Logout
+                Logout
             </a>
         </div>
     </div>
@@ -84,52 +84,47 @@
             </div>
             
             <div class="bookings-list">
-                <% 
-                List<Map<String, Object>> userBookings = (List<Map<String, Object>>) request.getAttribute("userBookings");
-                if (userBookings != null && !userBookings.isEmpty()) {
-                    boolean hasUpcoming = false;
-                    for (Map<String, Object> booking : userBookings) {
-                        String status = (String) booking.get("status");
-                        if (!"completed".equals(status) && !"cancelled".equals(status)) {
-                            hasUpcoming = true;
-                %>
-                <div class="booking-card">
-                    <div class="booking-status <%= status %>">
-                        <%= status %>
-                    </div>
-                    <div class="booking-details">
-                        <h3>Room <%= booking.get("room_number") %> - <%= booking.get("room_type") %></h3>
-                        <div class="booking-dates">
-                            <span>📅 Check In: <%= booking.get("check_in_date") %></span>
-                            <span>📅 Check Out: <%= booking.get("check_out_date") %></span>
-                        </div>
-                        <div class="booking-info">
-                            <span>👥 Guests: <%= booking.get("guest_count") %></span>
-                            <span>💰 Total: रु <%= booking.get("total_price") %></span>
-                        </div>
-                        <% if (booking.get("special_requests") != null && !booking.get("special_requests").toString().isEmpty()) { %>
-                            <div class="special-requests">
-                                📝 Special Request: <%= booking.get("special_requests") %>
+                <c:choose>
+                    <c:when test="${not empty userBookings}">
+                        <c:set var="hasUpcoming" value="false" />
+                        <c:forEach items="${userBookings}" var="booking">
+                            <c:if test="${booking.status != 'completed' and booking.status != 'cancelled'}">
+                                <c:set var="hasUpcoming" value="true" />
+                                <div class="booking-card">
+                                    <div class="booking-status ${booking.status}">
+                                        ${booking.status}
+                                    </div>
+                                    <div class="booking-details">
+                                        <h3>Room ${booking.room_number} - ${booking.room_type}</h3>
+                                        <div class="booking-dates">
+                                            <span>📅 Check In: ${booking.check_in_date}</span>
+                                            <span>📅 Check Out: ${booking.check_out_date}</span>
+                                        </div>
+                                        <div class="booking-info">
+                                            <span>👥 Guests: ${booking.guest_count}</span>
+                                            <span>💰 Total: रु ${booking.total_price}</span>
+                                        </div>
+                                        <c:if test="${not empty booking.special_requests}">
+                                            <div class="special-requests">
+                                                📝 Special Request: ${booking.special_requests}
+                                            </div>
+                                        </c:if>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${not hasUpcoming}">
+                            <div class="empty-state">
+                                <p>No upcoming reservations. <a href="${pageContext.request.contextPath}/user/rooms">Book a room now!</a></p>
                             </div>
-                        <% } %>
-                    </div>
-                </div>
-                <% 
-                        }
-                    }
-                    if (!hasUpcoming) {
-                %>
-                <div class="empty-state">
-                    <p>No upcoming reservations. <a href="${pageContext.request.contextPath}/user/rooms">Book a room now!</a></p>
-                </div>
-                <% 
-                    }
-                } else { 
-                %>
-                <div class="empty-state">
-                    <p>You haven't made any bookings yet. <a href="${pageContext.request.contextPath}/user/rooms">Browse available rooms</a></p>
-                </div>
-                <% } %>
+                        </c:if>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="empty-state">
+                            <p>You haven't made any bookings yet. <a href="${pageContext.request.contextPath}/user/rooms">Browse available rooms</a></p>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
         
@@ -141,30 +136,28 @@
             </div>
             
             <div class="rooms-grid">
-                <% 
-                List<Map<String, Object>> availableRooms = (List<Map<String, Object>>) request.getAttribute("availableRooms");
-                if (availableRooms != null && !availableRooms.isEmpty()) {
-                    for (Map<String, Object> room : availableRooms) {
-                %>
-                <div class="room-card">
-                    <div class="room-number">Room <%= room.get("room_number") %></div>
-                    <h3 class="room-type"><%= room.get("room_type") %></h3>
-                    <p class="room-desc"><%= room.get("description") %></p>
-                    <div class="room-price">
-                        रु <%= room.get("price_per_night") %> <span>/ night</span>
-                    </div>
-                    <a href="${pageContext.request.contextPath}/user/book?room_id=<%= room.get("room_id") %>" class="book-btn">
-                        Book Now →
-                    </a>
-                </div>
-                <% 
-                    }
-                } else { 
-                %>
-                <div class="empty-state">
-                    <p>No rooms available at the moment. Please check back later.</p>
-                </div>
-                <% } %>
+                <c:choose>
+                    <c:when test="${not empty availableRooms}">
+                        <c:forEach items="${availableRooms}" var="room">
+                            <div class="room-card">
+                                <div class="room-number">Room ${room.room_number}</div>
+                                <h3 class="room-type">${room.room_type}</h3>
+                                <p class="room-desc">${room.description}</p>
+                                <div class="room-price">
+                                    रु ${room.price_per_night} <span>/ night</span>
+                                </div>
+                                <a href="${pageContext.request.contextPath}/user/book?room_id=${room.room_id}" class="book-btn">
+                                    Book Now →
+                                </a>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="empty-state">
+                            <p>No rooms available at the moment. Please check back later.</p>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
         
@@ -186,14 +179,14 @@
                 <div class="info-row">
                     <span class="info-label">Member Since:</span>
                     <span class="info-value">
-                        <% 
-                        Map<String, Object> userProfile = (Map<String, Object>) request.getAttribute("userProfile");
-                        if (userProfile != null && userProfile.get("created_at") != null) {
-                            out.print(userProfile.get("created_at"));
-                        } else {
-                            out.print("2024");
-                        }
-                        %>
+                        <c:choose>
+                            <c:when test="${not empty userProfile and not empty userProfile.created_at}">
+                                ${userProfile.created_at}
+                            </c:when>
+                            <c:otherwise>
+                                2024
+                            </c:otherwise>
+                        </c:choose>
                     </span>
                 </div>
             </div>

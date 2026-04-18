@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,74 +123,66 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% 
-                    List<Map<String, Object>> recentBookings = (List<Map<String, Object>>) request.getAttribute("recentBookings");
-                    if (recentBookings != null && !recentBookings.isEmpty()) {
-                        for (Map<String, Object> booking : recentBookings) {
-                    %>
-                    <tr>
-                        <td><%= booking.get("full_name") %></td>
-                        <td><%= booking.get("room_number") %> - <%= booking.get("room_type") %></td>
-                        <td><%= booking.get("check_in_date") %></td>
-                        <td><%= booking.get("check_out_date") %></td>
-                        <td>रु <%= booking.get("total_price") %></td>
-                        <td>
-                            <span class="status <%= booking.get("status") %>">
-                                <%= booking.get("status") %>
-                            </span>
-                        </td>
-                    </tr>
-                    <% 
-                        }
-                    } else { 
-                    %>
-                    <tr>
-                        <td colspan="6" style="text-align: center;">No bookings found</td>
-                    </tr>
-                    <% } %>
+                    <c:choose>
+					    <c:when test="${not empty recentBookings}">
+					        <c:forEach items="${recentBookings}" var="booking">
+					            <tr>
+					                <td>${booking.full_name}</td>
+					                <td>${booking.room_number} - ${booking.room_type}</td>
+					                <td>${booking.check_in_date}</td>
+					                <td>${booking.check_out_date}</td>
+					                <td>रु ${booking.total_price}</td>
+					                <td><span class="status ${booking.status}">${booking.status}</span></td>
+					            </tr>
+					        </c:forEach>
+					    </c:when>
+					    <c:otherwise>
+					        <tr>
+					            <td colspan="6">No bookings found</td>
+					        </tr>
+					    </c:otherwise>
+					</c:choose>
                 </tbody>
             </table>
         </div>
         
         <!-- Recent Users Table -->
-        <div class="table-container">
-            <div class="table-header">
-                <h2>👤 Recent Guests</h2>
-                <a href="${pageContext.request.contextPath}/admin/users" class="view-link">View All →</a>
-            </div>
-            
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Registered On</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% 
-                    List<Map<String, Object>> recentUsers = (List<Map<String, Object>>) request.getAttribute("recentUsers");
-                    if (recentUsers != null && !recentUsers.isEmpty()) {
-                        for (Map<String, Object> user : recentUsers) {
-                    %>
-                    <tr>
-                        <td><%= user.get("full_name") %></td>
-                        <td><%= user.get("email") %></td>
-                        <td><%= user.get("phone") %></td>
-                        <td><%= user.get("created_at") %></td>
-                    </tr>
-                    <% 
-                        }
-                    } else { 
-                    %>
-                    <tr>
-                        <td colspan="4" style="text-align: center;">No users found</td>
-                    </tr>
-                    <% } %>
-                </tbody>
-            </table>
-        </div>
+		<div class="table-container">
+		    <div class="table-header">
+		        <h2>👤 Recent Guests</h2>
+		        <a href="${pageContext.request.contextPath}/admin/users" class="view-link">View All →</a>
+		    </div>
+		    
+		    <table class="data-table">
+		        <thead>
+		            <tr>
+		                <th>Name</th>
+		                <th>Email</th>
+		                <th>Phone</th>
+		                <th>Registered On</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <c:choose>
+		                <c:when test="${not empty recentUsers}">
+		                    <c:forEach items="${recentUsers}" var="user">
+		                        <tr>
+		                            <td>${user.full_name}</td>
+		                            <td>${user.email}</td>
+		                            <td>${user.phone}</td>
+		                            <td>${user.created_at}</td>
+		                        </tr>
+		                    </c:forEach>
+		                </c:when>
+		                <c:otherwise>
+		                    <tr>
+		                        <td colspan="4" style="text-align: center;">No users found</td>
+		                    </tr>
+		                </c:otherwise>
+		            </c:choose>
+		        </tbody>
+		    </table>
+		</div>
         
     </div>
 </div>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,19 +28,19 @@
         <h2 class="card-title">Login and Get Started</h2>
         <div class="gold-bar"></div>
 
-        <%-- SUCCESS MESSAGE (from registration) --%>
-        <% if (request.getAttribute("success") != null) { %>
-            <div class="msg msg-success">
-                <%= request.getAttribute("success") %>
-            </div>
-        <% } %>
-
-        <%-- ERROR MESSAGE --%>
-        <% if (request.getAttribute("error") != null) { %>
-            <div class="msg msg-error">
-                <%= request.getAttribute("error") %>
-            </div>
-        <% } %>
+        <%-- SUCCESS MESSAGE --%>
+		<c:if test="${not empty success}">
+		    <div class="msg msg-success">
+		        ${success}
+		    </div>
+		</c:if>
+		
+		<%-- ERROR MESSAGE --%>
+		<c:if test="${not empty error}">
+		    <div class="msg msg-error">
+		        ${error}
+		    </div>
+		</c:if>
 
         <!-- Login Form -->
         <form action="${pageContext.request.contextPath}/login" method="post">
@@ -51,7 +52,7 @@
                     <span class="input-icon">&#9993;</span>
                     <input type="email" id="email" name="email"
                            placeholder="your@email.com" 
-                           value="${rememberedEmail != null ? rememberedEmail : ''}"
+                           value="${not empty rememberedEmail ? rememberedEmail : ''}"
                            required>
                 </div>
             </div>
