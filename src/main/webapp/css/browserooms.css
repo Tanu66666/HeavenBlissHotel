@@ -1,0 +1,248 @@
+@charset "UTF-8";
+
+/* Filter Section */
+.filter-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.filter-form {
+    width: 100%;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 150px;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 12px;
+    color: #8b7355;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d4c4a8;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #faf8f3;
+    transition: all 0.3s;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: #c9a84c;
+    background: #ffffff;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-filter {
+    background: #c9a84c;
+    color: #1a1208;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-filter:hover {
+    background: #b8922e;
+}
+
+.btn-reset {
+    background: #8b7355;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.btn-reset:hover {
+    background: #6b5540;
+}
+
+/* Results Count */
+.results-count {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background: #f0ebe3;
+    border-radius: 8px;
+    color: #5a4a32;
+    font-size: 14px;
+}
+
+.results-count strong {
+    color: #c9a84c;
+}
+
+/* Rooms Container */
+.rooms-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Room Card */
+.room-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.room-card:hover {
+    transform: translateY(-3px);
+}
+
+.room-image {
+    width: 120px;
+    background: linear-gradient(135deg, #c9a84c 0%, #b8922e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+}
+
+.room-details {
+    flex: 1;
+    padding: 20px;
+}
+
+.room-number {
+    font-size: 12px;
+    color: #c9a84c;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.room-title {
+    font-size: 20px;
+    color: #2d1f0e;
+    margin-bottom: 10px;
+}
+
+.room-description {
+    font-size: 14px;
+    color: #8b7355;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.room-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #c9a84c;
+    margin-bottom: 15px;
+}
+
+.room-price span {
+    font-size: 13px;
+    font-weight: normal;
+    color: #8b7355;
+}
+
+.room-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-book {
+    background: #c9a84c;
+    color: #1a1208;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.btn-book:hover {
+    background: #b8922e;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    color: #8b7355;
+}
+
+.empty-state p {
+    margin-bottom: 15px;
+}
+
+.empty-state a {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-actions {
+        flex-direction: row;
+    }
+    
+    .filter-actions label {
+        display: none;
+    }
+    
+    .room-card {
+        flex-direction: column;
+    }
+    
+    .room-image {
+        width: 100%;
+        height: 100px;
+    }
+    
+    .room-title {
+        font-size: 18px;
+    }
+    
+    .room-price {
+        font-size: 20px;
+    }
+}

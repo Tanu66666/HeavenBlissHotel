@@ -1,0 +1,168 @@
+@charset "UTF-8";
+
+/* Profile Section */
+.profile-section {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.profile-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 25px;
+    border-bottom: 1px solid #e0d5c5;
+    background: #f9f6f0;
+}
+
+.profile-section-header h2 {
+    font-size: 18px;
+    color: #2d1f0e;
+    margin: 0;
+}
+
+/* Profile Form */
+.profile-form {
+    padding: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    color: #8b7355;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #d4c4a8;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #faf8f3;
+    transition: all 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #c9a84c;
+    background: #ffffff;
+}
+
+.form-group input:disabled {
+    background: #e0d5c5;
+    cursor: not-allowed;
+}
+
+/* Buttons */
+.btn-save {
+    background: #c9a84c;
+    color: #1a1208;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-save:hover {
+    background: #b8922e;
+}
+
+.btn-change {
+    background: #3d2008;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-change:hover {
+    background: #5a3a18;
+}
+
+/* Toggle Password */
+.toggle-password {
+    cursor: pointer;
+    color: #c9a84c;
+    font-size: 12px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.toggle-password:hover {
+    text-decoration: underline;
+}
+
+/* Security Question Box */
+.security-question-box {
+    background: #f0ebe3;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: #2d1f0e;
+    font-size: 14px;
+}
+
+.security-question-box strong {
+    color: #c9a84c;
+}
+
+/* Messages */
+.msg-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #2e7d32;
+}
+
+.msg-error {
+    background: #ffebee;
+    color: #c62828;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #c62828;
+}
+
+/* Two Columns Layout */
+.row-2cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .row-2cols {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-section-header {
+        padding: 15px 20px;
+    }
+    
+    .profile-form {
+        padding: 20px;
+    }
+    
+    .btn-save, .btn-change {
+        width: 100%;
+    }
+}
