@@ -17,7 +17,27 @@ body {
     min-height: 100vh;
 }
 
-/* ===== SIDEBAR ===== */
+/* ===== HAMBURGER MENU BUTTON ===== */
+.hamburger {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: #c9a84c;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: #1a1208;
+    transition: 0.3s;
+}
+
+.hamburger:hover {
+    background: #b8922e;
+}
+
+/* ===== SIDEBAR - HIDDEN BY DEFAULT ===== */
 .sidebar {
     width: 260px;
     background: linear-gradient(180deg, #1a1208 0%, #2d1f0e 100%);
@@ -27,8 +47,25 @@ body {
     position: fixed;
     height: 100vh;
     overflow-y: auto;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);  /* Hidden by default */
+    z-index: 1000;
 }
 
+/* ===== SIDEBAR OPEN STATE ===== */
+.sidebar.open {
+    transform: translateX(0);  /* Show when open class added */
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+    flex: 1;
+    margin-left: 0;
+    padding: 20px 30px;
+    transition: margin-left 0.3s ease;
+}
+
+/* ===== SIDEBAR BRAND ===== */
 .sidebar-brand {
     padding: 30px 20px;
     border-bottom: 1px solid #c9a84c;
@@ -46,6 +83,7 @@ body {
     color: #b8a88a;
 }
 
+/* ===== SIDEBAR NAV ===== */
 .sidebar-nav {
     flex: 1;
     padding: 20px 15px;
@@ -73,37 +111,30 @@ body {
     color: #1a1208;
 }
 
+/* ===== SIDEBAR FOOTER ===== */
 .sidebar-footer {
     padding: 20px;
     border-top: 1px solid #3d2a14;
     margin-top: auto;
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
 
 .logout-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 20px;
+    gap: 10px;
+    padding: 12px 15px;
     background: #8b0000;
     color: white;
     text-decoration: none;
     border-radius: 8px;
     transition: background 0.3s;
-    width: 80%;
-    text-align: center;
+    width: 100%;
 }
 
 .logout-btn:hover {
     background: #cc0000;
-}
-
-/* ===== MAIN CONTENT ===== */
-.main-content {
-    flex: 1;
-    margin-left: 260px;
-    padding: 20px 30px;
 }
 
 /* ===== WELCOME HEADER ===== */
@@ -127,7 +158,6 @@ body {
     font-size: 14px;
     opacity: 0.9;
 }
-
 
 /* ===== STATS CARDS ===== */
 .stats-cards {
@@ -194,31 +224,6 @@ body {
     border-radius: 10px;
     padding: 18px;
     margin-bottom: 15px;
-    position: relative;
-    border-left: 4px solid;
-}
-
-.booking-card .status {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.booking-card .status.confirmed {
-    border-left-color: #2e7d32;
-}
-.booking-card .status.pending {
-    border-left-color: #e65100;
-}
-.booking-card .status.completed {
-    border-left-color: #1565c0;
-}
-.booking-card .status.cancelled {
-    border-left-color: #c62828;
 }
 
 .booking-status {
@@ -412,18 +417,6 @@ body {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 70px;
-    }
-    .sidebar-brand h2, .sidebar-brand p, .nav-link span:last-child {
-        display: none;
-    }
-    .nav-link {
-        justify-content: center;
-    }
-    .main-content {
-        margin-left: 70px;
-    }
     .stats-cards {
         grid-template-columns: 1fr;
     }

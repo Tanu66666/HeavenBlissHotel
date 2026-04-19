@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +10,13 @@
 </head>
 <body>
 
+<!-- Hamburger Menu Button -->
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+
 <div class="admin-container">
     
     <!-- Sidebar Navigation -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-brand">
             <h2>Heaven Bliss</h2>
             <p>Admin Panel</p>
@@ -22,16 +24,16 @@
         
         <nav class="sidebar-nav">
             <a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link active">
-                 Dashboard
+                Dashboard
             </a>
             <a href="${pageContext.request.contextPath}/admin/rooms" class="nav-link">
-                 Rooms
+                Rooms
             </a>
             <a href="${pageContext.request.contextPath}/admin/users" class="nav-link">
-                 Users
+                Users
             </a>
             <a href="${pageContext.request.contextPath}/admin/bookings" class="nav-link">
-                 Bookings
+                Bookings
             </a>
         </nav>
         
@@ -124,68 +126,86 @@
                 </thead>
                 <tbody>
                     <c:choose>
-					    <c:when test="${not empty recentBookings}">
-					        <c:forEach items="${recentBookings}" var="booking">
-					            <tr>
-					                <td>${booking.full_name}</td>
-					                <td>${booking.room_number} - ${booking.room_type}</td>
-					                <td>${booking.check_in_date}</td>
-					                <td>${booking.check_out_date}</td>
-					                <td>रु ${booking.total_price}</td>
-					                <td><span class="status ${booking.status}">${booking.status}</span></td>
-					            </tr>
-					        </c:forEach>
-					    </c:when>
-					    <c:otherwise>
-					        <tr>
-					            <td colspan="6">No bookings found</td>
-					        </tr>
-					    </c:otherwise>
-					</c:choose>
+                        <c:when test="${not empty recentBookings}">
+                            <c:forEach items="${recentBookings}" var="booking">
+                                <tr>
+                                    <td>${booking.full_name}</td>
+                                    <td>${booking.room_number} - ${booking.room_type}</td>
+                                    <td>${booking.check_in_date}</td>
+                                    <td>${booking.check_out_date}</td>
+                                    <td>रु ${booking.total_price}</td>
+                                    <td><span class="status ${booking.status}">${booking.status}</span></td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td colspan="6" style="text-align: center;">No bookings found</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
                 </tbody>
             </table>
         </div>
         
         <!-- Recent Users Table -->
-		<div class="table-container">
-		    <div class="table-header">
-		        <h2>👤 Recent Guests</h2>
-		        <a href="${pageContext.request.contextPath}/admin/users" class="view-link">View All →</a>
-		    </div>
-		    
-		    <table class="data-table">
-		        <thead>
-		            <tr>
-		                <th>Name</th>
-		                <th>Email</th>
-		                <th>Phone</th>
-		                <th>Registered On</th>
-		            </tr>
-		        </thead>
-		        <tbody>
-		            <c:choose>
-		                <c:when test="${not empty recentUsers}">
-		                    <c:forEach items="${recentUsers}" var="user">
-		                        <tr>
-		                            <td>${user.full_name}</td>
-		                            <td>${user.email}</td>
-		                            <td>${user.phone}</td>
-		                            <td>${user.created_at}</td>
-		                        </tr>
-		                    </c:forEach>
-		                </c:when>
-		                <c:otherwise>
-		                    <tr>
-		                        <td colspan="4" style="text-align: center;">No users found</td>
-		                    </tr>
-		                </c:otherwise>
-		            </c:choose>
-		        </tbody>
-		    </table>
-		</div>
+        <div class="table-container">
+            <div class="table-header">
+                <h2>👤 Recent Guests</h2>
+                <a href="${pageContext.request.contextPath}/admin/users" class="view-link">View All →</a>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Registered On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:choose>
+                        <c:when test="${not empty recentUsers}">
+                            <c:forEach items="${recentUsers}" var="user">
+                                <tr>
+                                    <td>${user.full_name}</td>
+                                    <td>${user.email}</td>
+                                    <td>${user.phone}</td>
+                                    <td>${user.created_at}</td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td colspan="4" style="text-align: center;">No users found</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
+                </tbody>
+            </table>
+        </div>
         
     </div>
 </div>
+
+<script>
+    function toggleSidebar() {
+        var sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+    }
+    
+    // Close sidebar when clicking outside
+    document.addEventListener('click', function(event) {
+        var sidebar = document.getElementById('sidebar');
+        var hamburger = document.querySelector('.hamburger');
+        if (sidebar.classList.contains('open')) {
+            if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        }
+    });
+</script>
 
 </body>
 </html>

@@ -17,7 +17,27 @@ body {
     min-height: 100vh;
 }
 
-/* ===== SIDEBAR ===== */
+/* ===== HAMBURGER MENU BUTTON ===== */
+.hamburger {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: #c9a84c;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: #1a1208;
+    transition: 0.3s;
+}
+
+.hamburger:hover {
+    background: #b8922e;
+}
+
+/* ===== SIDEBAR - HIDDEN BY DEFAULT ===== */
 .sidebar {
     width: 260px;
     background: linear-gradient(180deg, #1a1208 0%, #2d1f0e 100%);
@@ -27,8 +47,17 @@ body {
     position: fixed;
     height: 100vh;
     overflow-y: auto;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+    z-index: 1000;
 }
 
+/* ===== SIDEBAR OPEN STATE ===== */
+.sidebar.open {
+    transform: translateX(0);
+}
+
+/* ===== SIDEBAR BRAND ===== */
 .sidebar-brand {
     padding: 30px 20px;
     border-bottom: 1px solid #c9a84c;
@@ -46,6 +75,7 @@ body {
     color: #b8a88a;
 }
 
+/* ===== SIDEBAR NAV ===== */
 .sidebar-nav {
     flex: 1;
     padding: 20px 15px;
@@ -73,6 +103,7 @@ body {
     color: #1a1208;
 }
 
+/* ===== SIDEBAR FOOTER ===== */
 .sidebar-footer {
     padding: 20px;
     border-top: 1px solid #3d2a14;
@@ -92,7 +123,6 @@ body {
     border-radius: 8px;
     transition: background 0.3s;
     width: 100%;
-    text-align: center;
 }
 
 .logout-btn:hover {
@@ -102,8 +132,9 @@ body {
 /* ===== MAIN CONTENT ===== */
 .main-content {
     flex: 1;
-    margin-left: 260px;
+    margin-left: 0;
     padding: 20px 30px;
+    transition: margin-left 0.3s ease;
 }
 
 /* ===== TOP BAR ===== */
@@ -286,25 +317,7 @@ body {
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 1024px) {
-    .stats-cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 @media (max-width: 768px) {
-    .sidebar {
-        width: 70px;
-    }
-    .sidebar-brand h2, .sidebar-brand p, .nav-link span:last-child {
-        display: none;
-    }
-    .nav-link {
-        justify-content: center;
-    }
-    .main-content {
-        margin-left: 70px;
-    }
     .stats-cards {
         grid-template-columns: 1fr;
     }
@@ -313,5 +326,8 @@ body {
     }
     .data-table {
         font-size: 12px;
+    }
+    .data-table th, .data-table td {
+        padding: 8px 10px;
     }
 }

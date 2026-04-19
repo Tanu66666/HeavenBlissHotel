@@ -10,10 +10,13 @@
 </head>
 <body>
 
+<!-- Hamburger Menu Button -->
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+
 <div class="user-container">
     
     <!-- Sidebar Navigation -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-brand">
             <h2>Heaven Bliss</h2>
             <p>Member Portal</p>
@@ -194,6 +197,24 @@
         
     </div>
 </div>
+
+<script>
+    function toggleSidebar() {
+        var sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+    }
+    
+    // Close sidebar when clicking outside (optional)
+    document.addEventListener('click', function(event) {
+        var sidebar = document.getElementById('sidebar');
+        var hamburger = document.querySelector('.hamburger');
+        if (sidebar.classList.contains('open')) {
+            if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        }
+    });
+</script>
 
 </body>
 </html>
