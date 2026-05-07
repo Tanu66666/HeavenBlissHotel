@@ -50,25 +50,29 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // Check if user is already logged in via session
         if (SessionUtil.isLoggedIn(req)) {
             String role = SessionUtil.getUserRole(req);
             if ("admin".equals(role)) {
                 resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
-            } else if ("guest".equals(role)) {
+            } else {
                 resp.sendRedirect(req.getContextPath() + "/user/dashboard");
             }
             return;
         }
         
-        // Check for "Remember Me" cookie to auto-fill email
+        // Save redirect parameter
+        String redirect = req.getParameter("redirect");
+        if (redirect != null && !redirect.isEmpty()) {
+            HttpSession session = req.getSession(true);
+            session.setAttribute("redirectAfterLogin", redirect);
+        }
+        
         String rememberedEmail = CookieUtil.getCookie(req, "remember_email");
         if (rememberedEmail != null) {
             req.setAttribute("rememberedEmail", rememberedEmail);
             req.setAttribute("rememberChecked", true);
         }
-        
-        // Forward to login page
+
         req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
     }
 
@@ -112,7 +116,7 @@ public class LoginController extends HttpServlet {
                 CookieUtil.deleteCookie(resp, "remember_email");
             }
             
-            // Redirect to admin dashboard
+         // Admin always goes to admin dashboard
             resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
             return;
         }
@@ -135,8 +139,16 @@ public class LoginController extends HttpServlet {
                 CookieUtil.deleteCookie(resp, "remember_email");
             }
             
-            // Redirect to user/guest dashboard
-            resp.sendRedirect(req.getContextPath() + "/user/dashboard");
+            // Check redirect
+            HttpSession session = req.getSession();
+            String redirect = (String) session.getAttribute("redirectAfterLogin");
+            if (redirect != null && redirect.equals("browse")) {
+                session.removeAttribute("redirectAfterLogin");
+                resp.sendRedirect(req.getContextPath() + "/user/rooms");
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/user/dashboard");
+            }
+            return;
             
         } else {
             // Check if account is locked

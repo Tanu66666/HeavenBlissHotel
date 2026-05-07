@@ -89,6 +89,11 @@
             Don't have an account?
             <a href="${pageContext.request.contextPath}/register">Register here</a>
         </p>
+        
+        <!-- Back to Home Link -->
+		<p class="back-home">
+		    <a href="${pageContext.request.contextPath}/home">← Back to Home</a>
+		</p>
 
     </div>
 

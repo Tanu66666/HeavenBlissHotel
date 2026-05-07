@@ -1,0 +1,113 @@
+/* ===== SLIDESHOW SECTION ===== */
+.slideshow-container {
+    max-width: 700px;
+    position: relative;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Slides */
+.slide {
+    display: none;
+    animation: fadeEffect 1.5s;
+}
+
+.slide img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+}
+
+/* Caption */
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    padding: 15px;
+    font-size: 14px;
+}
+
+/* Navigation Buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    padding: 16px 0;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.3s ease;
+    background-color: rgba(0,0,0,0.5);
+    text-align: center;
+    text-decoration: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 5px 0 0 5px;
+}
+
+.prev {
+    left: 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Dots Container */
+.dots-wrapper {
+    text-align: center;
+    padding: 15px 0;
+    background: #1a1208;
+    border-radius: 0 0 12px 12px;
+    margin-top: -5px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #555;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active, .dot:hover {
+    background-color: #c9a84c;
+}
+
+/* Fade Animation */
+@keyframes fadeEffect {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slide img {
+        height: 280px;
+    }
+    
+    .prev, .next {
+        width: 30px;
+        font-size: 14px;
+        padding: 10px 0;
+    }
+    
+    .slide-caption {
+        font-size: 11px;
+        padding: 8px;
+    }
+}
