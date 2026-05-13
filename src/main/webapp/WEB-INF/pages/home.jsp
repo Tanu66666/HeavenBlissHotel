@@ -160,10 +160,65 @@
                     </div>
                 </div>
                 
-                <button class="modal-book-btn" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">
-				    Book This Room →
-				</button>
+				<button class="modal-book-btn" onclick="openBookingModal()">Book This Room →</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Booking Details Modal -->
+<div id="bookingModal" class="booking-modal">
+    <div class="booking-modal-content">
+        <div class="booking-modal-header">
+            <h3>Complete Your Booking</h3>
+            <span class="close-booking-modal">&times;</span>
+        </div>
+        
+        <div class="booking-modal-body">
+            <div class="booking-room-summary">
+                <p><strong>Room:</strong> <span id="bookingSummaryRoom">Standard Single</span> (<span id="bookingSummaryRoomNumber">101</span>)</p>
+                <p><strong>Price:</strong> रु <span id="bookingSummaryPrice">2500</span> / night</p>
+            </div>
+            
+            <input type="hidden" id="bookingRoomId">
+            <input type="hidden" id="bookingRoomNumber">
+            <input type="hidden" id="bookingRoomType">
+            <input type="hidden" id="bookingPricePerNight">
+            
+            <div class="booking-form-group">
+                <label>Check-in Date:</label>
+                <input type="date" id="bookingCheckInDate" required>
+            </div>
+            
+            <div class="booking-form-group">
+                <label>Check-out Date:</label>
+                <input type="date" id="bookingCheckOutDate" required>
+            </div>
+            
+            <div class="booking-form-group">
+                <label>Number of Guests:</label>
+                <select id="bookingNumberOfGuests">
+                    <option value="1">1 Guest</option>
+                    <option value="2">2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                </select>
+            </div>
+            
+            <div class="booking-form-group">
+                <label>Special Requests (Optional):</label>
+                <textarea id="bookingSpecialRequests" rows="2" placeholder="Any special requests?"></textarea>
+            </div>
+            
+            <div id="bookingPriceBreakdown" style="display: none; background: #f0ebe3; padding: 12px; border-radius: 8px; margin: 15px 0;">
+                <strong>रु <span id="bookingPricePerNightDisplay">0</span></strong> × <span id="bookingNightsCount">0</span> nights = 
+                <strong>रु <span id="bookingTotalPriceDisplay">0</span></strong>
+            </div>
+        </div>
+        
+        <div class="booking-modal-footer">
+            <button type="button" class="btn-cancel" onclick="closeBookingModal()">Cancel</button>
+            <button type="button" class="btn-confirm-booking" onclick="submitBooking()">Confirm Booking →</button>
         </div>
     </div>
 </div>
@@ -772,6 +827,167 @@
         stopModalSlideshow();
         startModalSlideshow();
     }
+</script>
+
+<script>
+// Get booking modal elements
+const bookingModal = document.getElementById('bookingModal');
+const closeBookingModalBtn = document.querySelector('.close-booking-modal');
+
+// Store current room data for booking
+let currentBookingRoom = null;
+
+// Set hidden fields when view-room-btn is clicked
+document.querySelectorAll('.view-room-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const roomId = this.getAttribute('data-room-id');
+        const room = roomDetails[roomId];
+        
+        if (room) {
+            // Set booking hidden fields
+            document.getElementById('bookingRoomId').value = roomId;
+            document.getElementById('bookingRoomNumber').value = room.number;
+            document.getElementById('bookingRoomType').value = room.title;
+            document.getElementById('bookingPricePerNight').value = room.price;
+        }
+    });
+});
+
+// Open booking modal
+function openBookingModal() {
+    const roomId = document.getElementById('bookingRoomId').value;
+    const roomNumber = document.getElementById('bookingRoomNumber').value;
+    const roomType = document.getElementById('bookingRoomType').value;
+    const pricePerNight = document.getElementById('bookingPricePerNight').value;
+    
+    if (!roomId || roomId === '') {
+        alert('Please select a room first');
+        return;
+    }
+    
+    // Update booking modal summary
+    document.getElementById('bookingSummaryRoom').innerText = roomType;
+    document.getElementById('bookingSummaryRoomNumber').innerText = roomNumber;
+    document.getElementById('bookingSummaryPrice').innerText = pricePerNight;
+    
+    // Set min dates
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('bookingCheckInDate').min = today;
+    document.getElementById('bookingCheckOutDate').min = today;
+    
+    // Clear previous values
+    document.getElementById('bookingCheckInDate').value = '';
+    document.getElementById('bookingCheckOutDate').value = '';
+    document.getElementById('bookingNumberOfGuests').value = '1';
+    document.getElementById('bookingSpecialRequests').value = '';
+    document.getElementById('bookingPriceBreakdown').style.display = 'none';
+    
+    // Close the room modal
+    modal.style.display = 'none';
+    stopModalSlideshow();
+    
+    // Open booking modal
+    bookingModal.style.display = 'block';
+    
+    // Setup date calculation
+    setupBookingDateCalculation(parseFloat(pricePerNight));
+}
+
+// Close booking modal
+function closeBookingModal() {
+    bookingModal.style.display = 'none';
+}
+
+// Setup date calculation for booking modal
+function setupBookingDateCalculation(pricePerNight) {
+    const checkIn = document.getElementById('bookingCheckInDate');
+    const checkOut = document.getElementById('bookingCheckOutDate');
+    const priceBreakdown = document.getElementById('bookingPriceBreakdown');
+    const pricePerNightDisplay = document.getElementById('bookingPricePerNightDisplay');
+    const nightsCount = document.getElementById('bookingNightsCount');
+    const totalPriceDisplay = document.getElementById('bookingTotalPriceDisplay');
+    
+    function calculateTotal() {
+        if (checkIn.value && checkOut.value) {
+            const start = new Date(checkIn.value);
+            const end = new Date(checkOut.value);
+            const nights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+            
+            if (nights > 0) {
+                const total = nights * pricePerNight;
+                pricePerNightDisplay.innerText = pricePerNight;
+                nightsCount.innerText = nights;
+                totalPriceDisplay.innerText = total;
+                priceBreakdown.style.display = 'block';
+            } else {
+                priceBreakdown.style.display = 'none';
+                alert('Check-out date must be after check-in date');
+            }
+        }
+    }
+    
+    checkIn.removeEventListener('change', calculateTotal);
+    checkOut.removeEventListener('change', calculateTotal);
+    checkIn.addEventListener('change', calculateTotal);
+    checkOut.addEventListener('change', calculateTotal);
+}
+
+// Submit booking from booking modal
+function submitBooking() {
+    const roomId = document.getElementById('bookingRoomId').value;
+    const roomNumber = document.getElementById('bookingRoomNumber').value;
+    const roomType = document.getElementById('bookingRoomType').value;
+    const pricePerNight = document.getElementById('bookingPricePerNight').value;
+    const checkInDate = document.getElementById('bookingCheckInDate').value;
+    const checkOutDate = document.getElementById('bookingCheckOutDate').value;
+    const numberOfGuests = document.getElementById('bookingNumberOfGuests').value;
+    const specialRequests = document.getElementById('bookingSpecialRequests').value;
+    
+    if (!checkInDate || !checkOutDate) {
+        alert('Please select check-in and check-out dates');
+        return;
+    }
+    
+    // Create form and submit
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '${pageContext.request.contextPath}/book-room';
+    
+    const fields = {
+        roomId: roomId,
+        roomNumber: roomNumber,
+        roomType: roomType,
+        pricePerNight: pricePerNight,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+        numberOfGuests: numberOfGuests,
+        specialRequests: specialRequests
+    };
+    
+    for (const [key, value] of Object.entries(fields)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+    }
+    
+    document.body.appendChild(form);
+    form.submit();
+}
+
+// Close booking modal when clicking X or outside
+if (closeBookingModalBtn) {
+    closeBookingModalBtn.onclick = function() {
+        bookingModal.style.display = 'none';
+    }
+}
+
+window.onclick = function(event) {
+    if (event.target == bookingModal) {
+        bookingModal.style.display = 'none';
+    }
+}
 </script>
 
 <script>
