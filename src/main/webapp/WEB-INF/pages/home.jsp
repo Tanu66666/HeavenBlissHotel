@@ -21,14 +21,26 @@
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#rooms">Rooms</a>
+            <a href="${pageContext.request.contextPath}/activities">Activities</a>
+			<a href="${pageContext.request.contextPath}/packages">Packages</a>
             <a href="#about">About</a>
             <a href="#ratings">Ratings</a>
             <a href="#contact">Contact</a>
         </div>
         <div class="nav-buttons">
-            <a href="${pageContext.request.contextPath}/login" class="btn-login">Login</a>
-            <a href="${pageContext.request.contextPath}/register" class="btn-register">Register</a>
-        </div>
+		    <!-- Show Login/Register when NOT logged in -->
+		    <c:choose>
+		        <c:when test="${empty sessionScope.user}">
+		            <a href="${pageContext.request.contextPath}/login" class="btn-login">Login</a>
+		            <a href="${pageContext.request.contextPath}/register" class="btn-register">Register</a>
+		        </c:when>
+		        <c:otherwise>
+		            <!-- Show Dashboard and Logout when logged in -->
+		            <a href="${pageContext.request.contextPath}/user/dashboard" class="btn-dashboard">My Account</a>
+		            <a href="${pageContext.request.contextPath}/logout" class="btn-logout">Logout</a>
+		        </c:otherwise>
+		    </c:choose>
+		</div>
     </div>
 </nav>
 
@@ -93,7 +105,7 @@
         </div>
         
         <div class="view-all">
-            <a href="${pageContext.request.contextPath}/login" class="btn-view-all">View All Rooms →</a>
+            <a href="${pageContext.request.contextPath}/login?redirect=browse" class="btn-view-all">View All Rooms →</a>
         </div>
     </div>
 </section>
@@ -149,12 +161,117 @@
                 </div>
                 
                 <button class="modal-book-btn" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">
-                    Book This Room →
-                </button>
+				    Book This Room →
+				</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Activities Section -->
+<section class="activities-section">
+    <div class="container">
+        <h2 class="section-title">Activities & Experiences</h2>
+        <p class="section-subtitle">Make your stay unforgettable</p>
+        
+        <div class="activities-preview">
+            <div class="activity-card">
+                <div class="activity-image">
+                    <img src="${pageContext.request.contextPath}/images/activities/spa.jpg" alt="Luxury Spa">
+                </div>
+                <div class="activity-info">
+                    <h3>Luxury Spa</h3>
+                    <p>Relax with premium massage</p>
+                    <a href="${pageContext.request.contextPath}/activities" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-image">
+                    <img src="${pageContext.request.contextPath}/images/activities/dreamy-movie-room.jpg" alt="Private Cinema">
+                </div>
+                <div class="activity-info">
+                    <h3>Private Cinema</h3>
+                    <p>Movie experience like never before</p>
+                    <a href="${pageContext.request.contextPath}/activities" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-image">
+                    <img src="${pageContext.request.contextPath}/images/activities/outdoor-swmmingpool-view.jpg" alt="Infinity Pool">
+                </div>
+                <div class="activity-info">
+                    <h3>Infinity Pool</h3>
+                    <p>Swim with mountain views</p>
+                    <a href="${pageContext.request.contextPath}/activities" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="view-all">
+            <a href="${pageContext.request.contextPath}/activities" class="btn-view-all">View All Activities →</a>
+        </div>
+    </div>
+</section>
+
+<!-- Packages Section (Home Page) -->
+<section class="packages-section">
+    <div class="container">
+        <h2 class="section-title">Special Offer Packages</h2>
+        <p class="section-subtitle">Exclusive deals for unforgettable experiences</p>
+        
+        <div class="packages-preview">
+            <div class="package-card">
+                <div class="package-image">
+                    <img src="${pageContext.request.contextPath}/images/packages/romantic-boating.jpg" alt="Romantic Getaway">
+                    <div class="discount-badge">15% OFF</div>
+                </div>
+                <div class="package-info">
+                    <h3>Romantic Package</h3>
+                    <p>Perfect for couples. Includes Deluxe Room, Candlelight Dinner, and Spa.</p>
+                    <div class="package-price">
+                        <span class="original-price">रु 15,000</span>
+                        <span class="discounted-price">रु 12,750</span>
+                    </div>
+                    <a href="${pageContext.request.contextPath}/packages" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+            <div class="package-card">
+                <div class="package-image">
+                    <img src="${pageContext.request.contextPath}/images/activities/spa.jpg" alt="Wellness Retreat">
+                    <div class="discount-badge">20% OFF</div>
+                </div>
+                <div class="package-info">
+                    <h3>Wellness Retreat Package</h3>
+                    <p>Rejuvenate your body and mind. Includes Spa, Sauna, and Yoga session.</p>
+                    <div class="package-price">
+                        <span class="original-price">रु 12,000</span>
+                        <span class="discounted-price">रु 9,600</span>
+                    </div>
+                    <a href="${pageContext.request.contextPath}/packages" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+            <div class="package-card">
+                <div class="package-image">
+                    <img src="${pageContext.request.contextPath}/images/packages/rafting.jpg" alt="Adventure Package">
+                    <div class="discount-badge">10% OFF</div>
+                </div>
+                <div class="package-info">
+                    <h3>Adventure Package</h3>
+                    <p>For thrill-seekers. Includes Hiking, Rafting, and Sightseeing.</p>
+                    <div class="package-price">
+                        <span class="original-price">रु 18,000</span>
+                        <span class="discounted-price">रु 16,200</span>
+                    </div>
+                    <a href="${pageContext.request.contextPath}/packages" class="btn-explore">Explore →</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="view-all">
+            <a href="${pageContext.request.contextPath}/packages" class="btn-view-all">View All Packages →</a>
+        </div>
+    </div>
+</section>
 
 <!-- About Section with Slideshow -->
 <section id="about" class="about">
@@ -287,7 +404,7 @@
         <div class="ratings-grid">
             <div class="rating-card">
                 <div class="rating-profile">
-                    <img src="${pageContext.request.contextPath}/images/profile1.jpg" alt="Prapti Bhattrai" class="profile-img">
+                    <img src="${pageContext.request.contextPath}/images/prapti-profile.jpg" alt="Prapti Bhattrai" class="profile-img">
                 </div>
                 <div class="rating-author">Prapti Bhattrai</div>
                 <div class="rating-stars">★★★★★</div>
@@ -385,11 +502,12 @@
         </div>
         <div class="footer-links">
             <h4>Quick Links</h4>
-            <a href="#home">Home</a>
-            <a href="#rooms">Rooms</a>
-            <a href="#about">About</a>
-            <a href="#ratings">Ratings</a>
-            <a href="#contact">Contact</a>
+            <a href="${pageContext.request.contextPath}/home">Home</a>
+            <a href="${pageContext.request.contextPath}/#rooms">Rooms</a>
+            <a href="${pageContext.request.contextPath}/activities">Activities</a>
+            <a href="${pageContext.request.contextPath}/packages">Packages</a>
+            <a href="${pageContext.request.contextPath}/#about">About</a>
+            <a href="${pageContext.request.contextPath}/#contact">Contact</a>
         </div>
         <div class="footer-links">
             <h4>Support</h4>
@@ -411,7 +529,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2024 Heaven Bliss Hotel. All rights reserved. Hand-crafted excellence since 2024.</p>
+        <p>&copy; 2024 Heaven Bliss Hotel. All rights reserved.</p>
     </div>
 </footer>
 
@@ -654,6 +772,32 @@
         stopModalSlideshow();
         startModalSlideshow();
     }
+</script>
+
+<script>
+    // Force video to play when page becomes visible again
+    document.addEventListener('visibilitychange', function() {
+        const video = document.querySelector('.hero-video');
+        if (!document.hidden && video) {
+            video.play().catch(e => console.log('Video play failed:', e));
+        }
+    });
+    
+    // Handle back button navigation
+    window.addEventListener('pageshow', function(event) {
+        const video = document.querySelector('.hero-video');
+        if (event.persisted && video) {
+            video.play().catch(e => console.log('Video play failed:', e));
+        }
+    });
+    
+    // Also try to play if video hasn't started
+    window.addEventListener('load', function() {
+        const video = document.querySelector('.hero-video');
+        if (video && video.paused) {
+            video.play().catch(e => console.log('Video play failed:', e));
+        }
+    });
 </script>
 </body>
 </html>

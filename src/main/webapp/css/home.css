@@ -100,6 +100,45 @@ body {
 .btn-register:hover {
     background: #b8922e;
 }
+/* My Account Button */
+.btn-dashboard {
+    padding: 8px 20px;
+    background: #c9a84c;
+    color: #1a1208;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-dashboard:hover {
+    background: #b8922e;
+    transform: translateY(-2px);
+    color: #1a1208;
+}
+
+/* Logout Button */
+.btn-logout {
+    padding: 8px 20px;
+    border: 1px solid #c9a84c;
+    background: transparent;
+    color: #c9a84c;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background: #c9a84c;
+    color: #1a1208;
+    transform: translateY(-2px);
+}
 
 /* ===== HERO SECTION WITH VIDEO BACKGROUND ===== */
 .hero {
@@ -614,6 +653,685 @@ body {
     to { opacity: 1; }
 }
 
+/* ===== HOME PAGE ACTIVITIES SECTION ===== */
+
+.activities-section {
+    padding: 80px 20px;
+    background: white;
+}
+
+.activities-section .section-title {
+    text-align: center;
+    font-size: 36px;
+    color: #2d1f0e;
+    margin-bottom: 15px;
+}
+
+.activities-section .section-subtitle {
+    text-align: center;
+    color: #8b7355;
+    margin-bottom: 50px;
+}
+
+.activities-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Make activities cards same height as packages */
+.activities-preview .activity-card {
+    background: #f9f6f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.activities-preview .activity-card:hover {
+    transform: translateY(-5px);
+}
+
+.activities-preview .activity-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.activities-preview .activity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.activities-preview .activity-card:hover .activity-image img {
+    transform: scale(1.05);
+}
+
+.activities-preview .activity-info {
+    padding: 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.activities-preview .activity-info h3 {
+    font-size: 18px;
+    color: #2d1f0e;
+    margin-bottom: 8px;
+}
+
+.activities-preview .activity-info p {
+    font-size: 13px;
+    color: #8b7355;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    flex: 1;
+}
+
+.btn-explore {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #3d2008;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 13px;
+    transition: all 0.3s;
+    margin-top: auto;
+    text-align: center;
+}
+
+.btn-explore:hover {
+    background: #c9a84c;
+    color: #1a1208;
+}
+
+.view-all {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-view-all {
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid #c9a84c;
+    color: #c9a84c;
+    text-decoration: none;
+    border-radius: 40px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-view-all:hover {
+    background: #c9a84c;
+    color: #1a1208;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .activities-preview {
+        grid-template-columns: 1fr;
+    }
+    
+    .activities-preview .activity-image {
+        height: 180px;
+    }
+}
+
+/* ===== ACTIVITIES PAGE STYLES ===== */
+
+.activities-hero {
+    background: linear-gradient(135deg, #1a1208 0%, #2d1f0e 100%);
+    padding: 100px 20px 40px;
+    text-align: center;
+    color: #f5efe0;
+    margin-top: 60px;
+}
+
+.activities-hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.activities-hero p {
+    font-size: 16px;
+    color: #c9a84c;
+}
+
+.activities-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Category Filter Buttons */
+.category-filter {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    padding: 6px 20px;
+    background: #f0ebe3;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.category-btn.active,
+.category-btn:hover {
+    background: #c9a84c;
+    color: #1a1208;
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    align-items: stretch;
+}
+
+.activity-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.activity-card:hover {
+    transform: translateY(-3px);
+}
+
+.activity-image {
+    height: 200px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.activity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.activity-card:hover .activity-image img {
+    transform: scale(1.03);
+}
+
+.activity-info {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.activity-category {
+    display: inline-block;
+    padding: 3px 10px;
+    background: #f0ebe3;
+    border-radius: 20px;
+    font-size: 10px;
+    color: #c9a84c;
+    margin-bottom: 8px;
+    align-self: flex-start;
+}
+
+.activity-title {
+    font-size: 17px;
+    margin-bottom: 6px;
+    color: #2d1f0e;
+    font-weight: 600;
+}
+
+.activity-desc {
+    font-size: 12px;
+    color: #8b7355;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.activity-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #5a4a32;
+}
+
+.activity-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #c9a84c;
+    margin-bottom: 8px;
+}
+
+.activity-price span {
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.btn-book-activity {
+    width: 100%;
+    padding: 7px;
+    background: #3d2008;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: auto;
+    font-size: 13px;
+}
+
+.btn-book-activity:hover {
+    background: #c9a84c;
+    color: #1a1208;
+}
+
+/* Activities Page Responsive */
+@media (max-width: 1024px) {
+    .activities-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .activities-hero h1 {
+        font-size: 28px;
+    }
+    
+    .activities-hero p {
+        font-size: 13px;
+    }
+    
+    .activities-container {
+        padding: 30px 15px;
+    }
+    
+    .activities-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .category-btn {
+        padding: 5px 14px;
+        font-size: 12px;
+    }
+    
+    .activity-image {
+        height: 180px;
+    }
+    
+    .activity-info {
+        padding: 12px;
+    }
+    
+    .activity-title {
+        font-size: 16px;
+    }
+    
+    .activity-price {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .activities-hero {
+        padding: 80px 15px 30px;
+    }
+    
+    .activities-hero h1 {
+        font-size: 24px;
+    }
+    
+    .activity-image {
+        height: 160px;
+    }
+}
+
+/* ===== HOME PAGE PACKAGES SECTION ===== */
+.packages-section {
+    padding: 80px 20px;
+    background: #f5efe0;
+}
+
+.packages-section .section-title {
+    text-align: center;
+    font-size: 36px;
+    color: #2d1f0e;
+    margin-bottom: 15px;
+}
+
+.packages-section .section-subtitle {
+    text-align: center;
+    color: #8b7355;
+    margin-bottom: 50px;
+}
+
+.packages-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.packages-preview .package-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.packages-preview .package-card:hover {
+    transform: translateY(-5px);
+}
+
+.packages-preview .package-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.packages-preview .package-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #c62828;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.packages-preview .package-info {
+    padding: 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.packages-preview .package-info h3 {
+    font-size: 18px;
+    color: #2d1f0e;
+    margin-bottom: 8px;
+}
+
+.packages-preview .package-info p {
+    font-size: 13px;
+    color: #8b7355;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    flex: 1;
+}
+
+.package-price {
+    margin-bottom: 15px;
+}
+
+.original-price {
+    font-size: 13px;
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 8px;
+}
+
+.discounted-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #c9a84c;
+}
+
+.btn-explore {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #3d2008;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 13px;
+    transition: all 0.3s;
+    margin-top: auto;
+    text-align: center;
+}
+
+.btn-explore:hover {
+    background: #c9a84c;
+    color: #1a1208;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .packages-preview {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== PACKAGES PAGE STYLES ===== */
+.packages-hero {
+    background: linear-gradient(135deg, #1a1208 0%, #2d1f0e 100%);
+    padding: 120px 20px 60px;
+    text-align: center;
+    color: #f5efe0;
+    margin-top: 60px;
+}
+
+.packages-hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.packages-hero p {
+    font-size: 18px;
+    color: #c9a84c;
+}
+
+.packages-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.package-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.package-card:hover {
+    transform: translateY(-5px);
+}
+
+.package-image {
+    height: 280px;  
+    overflow: hidden;
+    position: relative;
+}
+
+.package-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.package-card:hover .package-image img {
+    transform: scale(1.05);
+}
+
+.discount-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #c62828;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.package-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.package-title {
+    font-size: 20px;
+    color: #2d1f0e;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.package-desc {
+    font-size: 13px;
+    color: #8b7355;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    flex: 1;
+}
+
+.package-price {
+    margin-bottom: 15px;
+}
+
+.original-price {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.discounted-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #c9a84c;
+}
+
+.discounted-price span {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.btn-book-package {
+    width: 100%;
+    padding: 12px;
+    background: #3d2008;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+    margin-top: auto;
+}
+
+.btn-book-package:hover {
+    background: #c9a84c;
+    color: #1a1208;
+}
+
+/* Packages Page Responsive */
+@media (max-width: 1024px) {
+    .packages-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .packages-hero h1 {
+        font-size: 32px;
+    }
+    
+    .packages-hero p {
+        font-size: 14px;
+    }
+    
+    .packages-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .package-image {
+        height: 220px;
+    }
+}
+
+/* ===== PACKAGE MODAL STYLES ===== */
+.modal-includes {
+    margin: 20px 0;
+}
+
+.modal-includes h4 {
+    color: #2d1f0e;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.modal-includes ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-includes li {
+    padding: 5px 0;
+    color: #5a4a32;
+    font-size: 13px;
+}
+
+.booking-note {
+    background: #f9f6f0;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #8b7355;
+    text-align: center;
+    margin-top: 15px;
+}
+
 /* ===== ABOUT SECTION ===== */
 .about {
     padding: 60px 20px;
@@ -1061,5 +1779,53 @@ body {
     
     .btn-send {
         width: 100%;
+    }
+}
+
+/* ===== ACTIVITIES  ===== */
+.activities-grid .activity-image {
+    height: 280px !important;
+}
+
+.activities-grid .activity-title {
+    min-height: 65px;
+    font-size: 22px;
+}
+
+.activities-grid .activity-desc {
+    min-height: 80px;
+}
+
+.activities-grid .activity-price {
+    font-size: 26px;
+}
+
+.activities-grid .btn-book-activity {
+    padding: 12px;
+    font-size: 15px;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+    .activities-grid .activity-image {
+        height: 220px !important;
+    }
+    
+    .activities-grid .activity-title {
+        min-height: auto;
+        font-size: 18px;
+    }
+    
+    .activities-grid .activity-desc {
+        min-height: auto;
+    }
+    
+    .activities-grid .activity-price {
+        font-size: 20px;
+    }
+    
+    .activities-grid .btn-book-activity {
+        padding: 8px;
+        font-size: 13px;
     }
 }
