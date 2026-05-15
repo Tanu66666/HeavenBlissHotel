@@ -19,30 +19,31 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <h2>Heaven Bliss</h2>
-            <p>Member Portal</p>
-        </div>
+		    <img src="${pageContext.request.contextPath}/images/logo.png" alt="Heaven Bliss Logo" class="sidebar-logo">
+		    <h2>Heaven Bliss</h2>
+		    <p>Member Portal</p>
+		</div>
         
         <nav class="sidebar-nav">
-            <a href="${pageContext.request.contextPath}/user/dashboard" class="nav-link">
-                Dashboard
-            </a>
-            <a href="${pageContext.request.contextPath}/user/bookings" class="nav-link">
-                My Bookings
-            </a>
-            <a href="${pageContext.request.contextPath}/user/profile" class="nav-link active">
-                My Profile
-            </a>
-            <a href="${pageContext.request.contextPath}/user/rooms" class="nav-link">
-                Browse Rooms
-            </a>
-        </nav>
+		    <a href="${pageContext.request.contextPath}/user/dashboard" class="nav-link">
+		        Dashboard
+		    </a>
+		    <a href="${pageContext.request.contextPath}/user/rooms" class="nav-link">
+		        Browse Rooms
+		    </a>
+		    <a href="${pageContext.request.contextPath}/user/bookings" class="nav-link">
+		        My Bookings
+		    </a>
+		    <a href="${pageContext.request.contextPath}/user/profile" class="nav-link active">
+		        My Profile
+		    </a>
+		</nav>
         
         <div class="sidebar-footer">
-            <a href="${pageContext.request.contextPath}/logout" class="logout-btn">
-                Logout
-            </a>
-        </div>
+		    <a href="${pageContext.request.contextPath}/" class="logout-btn">
+		        ← Back to Home
+		    </a>
+		</div>
     </div>
     
     <!-- Main Content -->
@@ -152,16 +153,35 @@
 <script>
     function toggleSidebar() {
         var sidebar = document.getElementById('sidebar');
+        var hamburger = document.querySelector('.hamburger');
         sidebar.classList.toggle('open');
+        
+        // Hide hamburger icon when sidebar is open
+        if (sidebar.classList.contains('open')) {
+            hamburger.style.display = 'none';
+        } else {
+            hamburger.style.display = 'block';
+        }
     }
     
+    // Close sidebar when clicking outside
     document.addEventListener('click', function(event) {
         var sidebar = document.getElementById('sidebar');
         var hamburger = document.querySelector('.hamburger');
         if (sidebar.classList.contains('open')) {
             if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
                 sidebar.classList.remove('open');
+                hamburger.style.display = 'block';  // Show hamburger again
             }
+        }
+    });
+    
+    // Show hamburger on page load if sidebar is closed
+    window.addEventListener('load', function() {
+        var sidebar = document.getElementById('sidebar');
+        var hamburger = document.querySelector('.hamburger');
+        if (!sidebar.classList.contains('open')) {
+            hamburger.style.display = 'block';
         }
     });
     
