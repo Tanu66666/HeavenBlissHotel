@@ -96,3 +96,21 @@
 .booking-actions {
     margin-top: 10px;
 }
+
+/* My Bookings header */
+.welcome-header {
+    margin-bottom: 35px;
+}
+
+.welcome-header h1 {
+    font-size: 28px;
+    font-weight: 400;
+    font-family: 'Georgia', serif;
+    color: #2d1f0e;
+    margin-bottom: 8px;
+}
+
+.welcome-header p {
+    font-size: 14px;
+    color: #8b7355;
+}

@@ -73,7 +73,7 @@
         <!-- Edit Profile Section -->
         <div class="profile-section">
             <div class="profile-section-header">
-                <h2>✏️ Edit Profile Information</h2>
+                <h2>Edit Profile Information</h2>
             </div>
             
             <form class="profile-form" action="${pageContext.request.contextPath}/user/profile" method="post">
@@ -108,7 +108,7 @@
         <!-- Change Password Section -->
         <div class="profile-section">
             <div class="profile-section-header">
-                <h2>🔒 Change Password</h2>
+                <h2>Change Password</h2>
             </div>
             
             <form class="profile-form" action="${pageContext.request.contextPath}/user/profile" method="post" 

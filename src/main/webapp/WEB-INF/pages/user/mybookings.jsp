@@ -80,7 +80,7 @@
         <!-- Bookings List -->
         <div class="section">
             <div class="section-header">
-                <h2>📋 Your Reservations</h2>
+                <h2>Your Reservations</h2>
             </div>
             
             <div class="bookings-list">
@@ -94,19 +94,19 @@
                                 <div class="booking-details">
                                     <h3>Room ${booking.room_number} - ${booking.room_type}</h3>
                                     <div class="booking-dates">
-                                        <span>📅 Check In: ${booking.check_in_date}</span>
-                                        <span>📅 Check Out: ${booking.check_out_date}</span>
+                                        <span>Check In: ${booking.check_in_date}</span>
+                                        <span>Check Out: ${booking.check_out_date}</span>
                                     </div>
                                     <div class="nights-info">
-                                        📆 ${booking.nights} nights at रु ${booking.price_per_night} per night
+                                         ${booking.nights} nights at रु ${booking.price_per_night} per night
                                     </div>
                                     <div class="booking-info">
-                                        <span>👥 Guests: ${booking.guest_count}</span>
-                                        <span>💰 Total Paid: रु ${booking.total_price}</span>
+                                        <span>Guests: ${booking.guest_count}</span>
+                                        <span>Total Paid: रु ${booking.total_price}</span>
                                     </div>
                                     <c:if test="${not empty booking.special_requests}">
                                         <div class="special-requests">
-                                            📝 Special Request: ${booking.special_requests}
+                                            Special Request: ${booking.special_requests}
                                         </div>
                                     </c:if>
                                 </div>
@@ -131,7 +131,7 @@
                     </c:when>
                     <c:otherwise>
                         <div class="empty-state">
-                            <p>📭 No bookings found.</p>
+                            <p>No bookings found.</p>
                             <a href="${pageContext.request.contextPath}/user/rooms">Browse available rooms →</a>
                         </div>
                     </c:otherwise>

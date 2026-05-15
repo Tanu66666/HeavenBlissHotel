@@ -40,7 +40,7 @@
         
         <div class="sidebar-footer">
             <a href="${pageContext.request.contextPath}/home" class="logout-btn">
-                Back to Home
+                ← Back to Home
             </a>
         </div>
     </div>
@@ -115,7 +115,7 @@
             <div class="featured-rooms">
                 <!-- Deluxe Twin Room (room_id = 3) -->
                 <div class="featured-room-card">
-                    <div class="room-image-placeholder" style="background-image: url('${pageContext.request.contextPath}/images/deluxe/deluxe-bed.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="room-image-placeholder" style="background-image: url('${pageContext.request.contextPath}/images/deluxe/deluxe-bed.jpg'); background-size: cover; background-position: center; height: 250px;"></div>
                     <div class="featured-room-content">
                         <h3 class="featured-room-title">Deluxe Twin</h3>
                         <p class="featured-room-desc">Two comfortable single beds with modern amenities. Perfect for friends or colleagues traveling together.</p>
@@ -134,7 +134,7 @@
                 
                 <!-- Family Room (room_id = 4) -->
                 <div class="featured-room-card">
-                    <div class="room-image-placeholder" style="background-image: url('${pageContext.request.contextPath}/images/family/king-size-bed.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="room-image-placeholder" style="background-image: url('${pageContext.request.contextPath}/images/family/king-size-bed.jpg'); background-size: cover; background-position: center; height: 250px;"></div>
                     <div class="featured-room-content">
                         <h3 class="featured-room-title">Family Room</h3>
                         <p class="featured-room-desc">Spacious room with two double beds, perfect for family vacations. Kid-friendly amenities included.</p>
@@ -153,7 +153,7 @@
                 
                 <!-- VIP Executive (room_id = 6) -->
                 <div class="featured-room-card">
-                    <div class="room-image-placeholder" style="background-image: url('${pageContext.request.contextPath}/images/vipSuite/vip-bed.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="room-image-placeholder" style="background-image: url('${pageContext.request.contextPath}/images/vipSuite/vip-bed.jpg'); background-size: cover; background-position: center; height: 250px;"></div>
                     <div class="featured-room-content">
                         <h3 class="featured-room-title">VIP Executive</h3>
                         <p class="featured-room-desc">Luxurious executive suite with king-size bed, panoramic views, and personalized butler service.</p>
