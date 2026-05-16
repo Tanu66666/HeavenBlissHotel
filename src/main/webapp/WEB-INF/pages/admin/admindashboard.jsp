@@ -113,7 +113,7 @@
         <!-- Recent Bookings Table -->
         <div class="table-container">
             <div class="table-header">
-                <h2>📋 Recent Bookings</h2>
+                <h2>Recent Bookings</h2>
                 <a href="${pageContext.request.contextPath}/admin/bookings" class="view-link">View All →</a>
             </div>
             
@@ -155,7 +155,7 @@
         <!-- Recent Users Table -->
         <div class="table-container">
             <div class="table-header">
-                <h2>👤 Recent Guests</h2>
+                <h2>Recent Guests</h2>
                 <a href="${pageContext.request.contextPath}/admin/users" class="view-link">View All →</a>
             </div>
             

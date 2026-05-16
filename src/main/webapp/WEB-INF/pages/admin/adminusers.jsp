@@ -63,7 +63,7 @@
         <!-- Users Table -->
         <div class="table-container">
             <div class="table-header">
-                <h2>👥 Registered Guests</h2>
+                <h2>Registered Guests</h2>
             </div>
             
             <table class="data-table">

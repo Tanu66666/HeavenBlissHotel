@@ -111,7 +111,7 @@
         <!-- Bookings Table -->
         <div class="table-container">
             <div class="table-header">
-                <h2>📋 All Bookings</h2>
+                <h2>All Bookings</h2>
             </div>
             
             <table class="data-table">

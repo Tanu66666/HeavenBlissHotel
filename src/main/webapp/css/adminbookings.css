@@ -4,26 +4,36 @@
 .stats-cards {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
 .stat-card {
     background: white;
-    border-radius: 10px;
-    padding: 15px;
+    border: 1px solid #e8e0d5;
+    border-radius: 8px;
+    padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-color: #c9a84c;
 }
 
 .stat-card h3 {
     font-size: 28px;
-    margin-bottom: 5px;
+    font-weight: 400;
+    font-family: 'Georgia', serif;
+    margin-bottom: 8px;
 }
 
 .stat-card p {
-    font-size: 12px;
-    color: #8b7355;
+    font-size: 11px;
+    color: #8a7a6a;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .stat-card.pending h3 { color: #e65100; }
@@ -44,8 +54,8 @@
     background: #f0ebe3;
     color: #5a4a32;
     text-decoration: none;
-    border-radius: 25px;
-    font-size: 14px;
+    border-radius: 20px;
+    font-size: 13px;
     transition: all 0.3s;
 }
 
@@ -61,10 +71,12 @@
 /* Status Badges */
 .status {
     display: inline-block;
-    padding: 5px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .status.pending {
@@ -109,33 +121,69 @@
 }
 
 .btn-delete {
-    background: #c62828;
-    color: white;
+    background: transparent;
+    color: #c62828;
     padding: 5px 12px;
-    border-radius: 5px;
+    border-radius: 4px;
     text-decoration: none;
     font-size: 12px;
-    transition: background 0.3s;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid #c62828;
+    display: inline-block;
 }
 
 .btn-delete:hover {
-    background: #8b0000;
+    background: #c62828;
+    color: white;
 }
 
-/* Table Styles */
+.status-select {
+    padding: 5px 10px;
+    border: 1px solid #d4c4a8;
+    border-radius: 4px;
+    background: #faf8f3;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.status-select:hover {
+    border-color: #c9a84c;
+    background: #ffffff;
+}
+
+.status-select:focus {
+    outline: none;
+    border-color: #c9a84c;
+}
+
+/* Table Header Styling */
+.data-table th {
+    background: #faf8f5;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #8a7a6a;
+}
+
 .data-table td {
+    font-size: 13px;
+    color: #5a4a32;
     vertical-align: middle;
 }
 
 .data-table small {
     font-size: 11px;
-    color: #8b7355;
+    color: #8a7a6a;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
     .stats-cards {
         grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
     }
 }
 
@@ -150,13 +198,15 @@
     
     .action-buttons {
         flex-direction: column;
+        align-items: flex-start;
     }
     
     .data-table {
         font-size: 12px;
     }
     
-    .data-table th, .data-table td {
+    .data-table th, 
+    .data-table td {
         padding: 8px 10px;
     }
 }

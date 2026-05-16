@@ -70,7 +70,7 @@
         <!-- Rooms Table -->
         <div class="table-container">
             <div class="table-header">
-                <h2>📋 All Rooms</h2>
+                <h2>All Rooms</h2>
             </div>
             
             <table class="data-table">

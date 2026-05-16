@@ -161,47 +161,6 @@ body {
     transition: margin-left 0.3s ease;
 }
 
-.sidebar-nav .nav-link {
-    display: block;
-    padding: 12px 20px;
-    color: #d4ccbf;
-    text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    border-left: 3px solid transparent;
-    transition: all 0.2s ease;
-    margin-bottom: 4px;
-    background: transparent;
-}
-
-.sidebar-nav .nav-link:hover {
-    background: rgba(201, 168, 76, 0.1);
-    color: #c9a84c;
-    border-left-color: #c9a84c;
-}
-
-.sidebar-nav .nav-link.active {
-    background: rgba(201, 168, 76, 0.15);
-    color: #c9a84c;
-    border-left-color: #c9a84c;
-    font-weight: 500;
-}
-
-/* Remove any default list styles */
-.sidebar-nav {
-    padding: 30px 20px;
-}
-
-.sidebar-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar-nav li {
-    list-style: none;
-}
-
 /* ===== TOP BAR ===== */
 .top-bar {
     display: flex;
@@ -209,12 +168,16 @@ body {
     align-items: center;
     margin-bottom: 30px;
     padding-bottom: 15px;
+    padding-left: 30px;
     border-bottom: 2px solid #c9a84c;
 }
 
 .top-bar h1 {
     color: #2d1f0e;
-    font-size: 28px;
+    font-size: 24px;
+    font-weight: 400;
+    font-family: 'Georgia', serif;
+    letter-spacing: 1px;
 }
 
 .admin-welcome {
@@ -249,12 +212,16 @@ body {
 
 .card-info h3 {
     font-size: 32px;
-    color: #2d1f0e;
+    font-weight: 400;
+    color: #c9a84c;
+    font-family: 'Georgia', serif;
 }
 
 .card-info p {
-    color: #8b7355;
-    font-size: 13px;
+    color: #8a7a6a;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .card-trend {
@@ -282,12 +249,15 @@ body {
 }
 
 .stat-box span {
-    color: #8b7355;
-    font-size: 14px;
+    color: #8a7a6a;
+    font-size: 12px;
+    letter-spacing: 1px;
 }
 
 .stat-box strong {
-    font-size: 24px;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: 'Georgia', serif;
 }
 
 .stat-box .green { color: #2e7d32; }
@@ -312,8 +282,12 @@ body {
 }
 
 .table-header h2 {
-    font-size: 18px;
-    color: #2d1f0e;
+    font-size: 16px;
+    font-weight: 400;
+    color: #2c2418;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Georgia', serif;
 }
 
 .view-link {
@@ -352,6 +326,18 @@ body {
     background: #f9f6f0;
 }
 
+.card, .stat-box, .table-container {
+    border-radius: 8px;
+}
+
+.data-table tr {
+    transition: background 0.2s ease;
+}
+
+.data-table tr:hover {
+    background: #f5f0e8;
+}
+
 /* ===== STATUS BADGES ===== */
 .status {
     display: inline-block;
@@ -359,6 +345,7 @@ body {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 500;
+    transition: all 0.2s ease;
 }
 
 .status.confirmed {
@@ -379,6 +366,10 @@ body {
 .status.cancelled {
     background: #ffebee;
     color: #c62828;
+}
+
+.status:hover {
+    transform: scale(1.05);
 }
 
 /* ===== RESPONSIVE ===== */

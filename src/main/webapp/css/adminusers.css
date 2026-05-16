@@ -8,59 +8,75 @@
 }
 
 .btn-edit {
-    background: #2196f3;
-    color: white;
+    background: transparent;
+    color: #c9a84c;
     padding: 5px 12px;
-    border-radius: 5px;
+    border-radius: 4px;
     text-decoration: none;
     font-size: 12px;
-    transition: background 0.3s;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid #c9a84c;
+    display: inline-block;
 }
 
 .btn-edit:hover {
-    background: #0b7dda;
+    background: #c9a84c;
+    color: #1a1612;
 }
 
 .btn-unlock {
-    background: #ff9800;
-    color: white;
+    background: transparent;
+    color: #ff9800;
     padding: 5px 12px;
-    border-radius: 5px;
+    border-radius: 4px;
     text-decoration: none;
     font-size: 12px;
-    transition: background 0.3s;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid #ff9800;
+    display: inline-block;
 }
 
 .btn-unlock:hover {
-    background: #e68900;
+    background: #ff9800;
+    color: white;
 }
 
 .btn-reset {
-    background: #9c27b0;
-    color: white;
+    background: transparent;
+    color: #9c27b0;
     padding: 5px 12px;
-    border-radius: 5px;
+    border-radius: 4px;
     text-decoration: none;
     font-size: 12px;
-    transition: background 0.3s;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid #9c27b0;
+    display: inline-block;
 }
 
 .btn-reset:hover {
-    background: #7b1fa2;
+    background: #9c27b0;
+    color: white;
 }
 
 .btn-delete {
-    background: #c62828;
-    color: white;
+    background: transparent;
+    color: #c62828;
     padding: 5px 12px;
-    border-radius: 5px;
+    border-radius: 4px;
     text-decoration: none;
     font-size: 12px;
-    transition: background 0.3s;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid #c62828;
+    display: inline-block;
 }
 
 .btn-delete:hover {
-    background: #8b0000;
+    background: #c62828;
+    color: white;
 }
 
 /* Status Badges */
@@ -107,21 +123,23 @@
 
 .form-group label {
     display: block;
-    font-size: 13px;
-    color: #8b7355;
-    margin-bottom: 8px;
-    font-weight: 600;
+    font-size: 12px;
+    color: #8a7a6a;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 12px 15px;
+    padding: 10px 12px;
     border: 1px solid #d4c4a8;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 14px;
     background: #faf8f3;
-    transition: all 0.3s;
+    font-family: inherit;
+    transition: all 0.2s ease;
 }
 
 .form-group input:focus,
@@ -144,14 +162,15 @@
 
 .btn-save {
     background: #c9a84c;
-    color: #1a1208;
+    color: #1a1612;
     border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
+    padding: 10px 24px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background 0.3s;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
 }
 
 .btn-save:hover {
@@ -159,20 +178,22 @@
 }
 
 .btn-cancel {
-    background: #8b7355;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
+    background: transparent;
+    color: #8a7a6a;
+    border: 1px solid #d4c4a8;
+    padding: 10px 24px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
     display: inline-block;
-    transition: background 0.3s;
+    transition: all 0.2s ease;
+    text-align: center;
 }
 
 .btn-cancel:hover {
-    background: #6b5540;
+    background: #f0ebe3;
+    border-color: #c9a84c;
 }
 
 /* Responsive */
