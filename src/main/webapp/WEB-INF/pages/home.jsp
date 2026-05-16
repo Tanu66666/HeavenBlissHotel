@@ -991,28 +991,8 @@ window.onclick = function(event) {
 </script>
 
 <script>
-    // Force video to play when page becomes visible again
-    document.addEventListener('visibilitychange', function() {
-        const video = document.querySelector('.hero-video');
-        if (!document.hidden && video) {
-            video.play().catch(e => console.log('Video play failed:', e));
-        }
-    });
-    
-    // Handle back button navigation
-    window.addEventListener('pageshow', function(event) {
-        const video = document.querySelector('.hero-video');
-        if (event.persisted && video) {
-            video.play().catch(e => console.log('Video play failed:', e));
-        }
-    });
-    
-    // Also try to play if video hasn't started
-    window.addEventListener('load', function() {
-        const video = document.querySelector('.hero-video');
-        if (video && video.paused) {
-            video.play().catch(e => console.log('Video play failed:', e));
-        }
+    window.addEventListener('pageshow', function() {
+        document.querySelector('.hero-video')?.play();
     });
 </script>
 </body>

@@ -63,10 +63,10 @@
         <!-- Room Form -->
         <div class="form-container">
             <form action="${pageContext.request.contextPath}/admin/rooms" method="post" class="room-form">
-                <input type="hidden" name="action" value="${isEdit ? 'update' : 'add'}">
-                <c:if test="${isEdit}">
-                    <input type="hidden" name="room_id" value="${room.room_id}">
-                </c:if>
+			    <input type="hidden" name="action" value="${isEdit ? 'update' : 'add'}">
+			    <c:if test="${isEdit}">
+			        <input type="hidden" name="room_id" value="${room.room_id}">
+			    </c:if>
                 
                 <div class="form-row">
                     <div class="form-group">

@@ -1,6 +1,7 @@
 package com.heavenbliss.controller;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -39,7 +41,12 @@ public class AdminRoomsController extends HttpServlet {
         String action = req.getParameter("action");
         
         try {
-            if ("edit".equals(action)) {
+        	if ("add".equals(action)) {
+        	    // Show add form
+        	    req.setAttribute("isEdit", false);
+        	    req.getRequestDispatcher("/WEB-INF/pages/admin/roomform.jsp").forward(req, resp);
+        	    return;
+        	}else if("edit".equals(action)) {
                 // Show edit form
                 int roomId = Integer.parseInt(req.getParameter("id"));
                 Map<String, Object> room = getRoomById(roomId);
@@ -147,29 +154,39 @@ public class AdminRoomsController extends HttpServlet {
     private void addRoom(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         
-        String roomNumber = req.getParameter("room_number");
-        String roomType = req.getParameter("room_type");
-        double pricePerNight = Double.parseDouble(req.getParameter("price_per_night"));
-        String description = req.getParameter("description");
-        String status = req.getParameter("status");
-        
-        String sql = "INSERT INTO rooms (room_number, room_type, price_per_night, description, status) VALUES (?, ?, ?, ?, ?)";
-        
-        try (Connection conn = DbConfig.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try {
+            String roomNumber = req.getParameter("room_number");
+            String roomType = req.getParameter("room_type");
+            String pricePerNightStr = req.getParameter("price_per_night");
+            String description = req.getParameter("description");
+            String status = req.getParameter("status");
             
+            double pricePerNight = Double.parseDouble(pricePerNightStr);
+            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/heavenbliss?allowPublicKeyRetrieval=true&useSSL=false", "root", "");
+            
+            String sql = "INSERT INTO rooms (room_number, room_type, price_per_night, description, status, image_path) VALUES (?, ?, ?, ?, ?, '')";
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, roomNumber);
             ps.setString(2, roomType);
             ps.setDouble(3, pricePerNight);
             ps.setString(4, description);
             ps.setString(5, status);
-            ps.executeUpdate();
+            
+            int result = ps.executeUpdate();
+            System.out.println("Insert result: " + result);
+            
+            ps.close();
+            conn.close();
+            
+            resp.sendRedirect(req.getContextPath() + "/admin/rooms");
             
         } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
+            resp.sendRedirect(req.getContextPath() + "/admin/rooms?error=" + e.getMessage());
         }
-        
-        resp.sendRedirect(req.getContextPath() + "/admin/rooms");
     }
     
     private void updateRoom(HttpServletRequest req, HttpServletResponse resp)
