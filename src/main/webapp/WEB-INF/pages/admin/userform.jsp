@@ -19,6 +19,7 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-brand">
+        <img src="${pageContext.request.contextPath}/images/logo.png" alt="Heaven Bliss Logo" class="sidebar-logo">
             <h2>Heaven Bliss</h2>
             <p>Admin Panel</p>
         </div>

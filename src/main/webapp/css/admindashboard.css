@@ -7,8 +7,10 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0ebe3;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', 'Times New Roman', serif;
+    background: #f5f0e8;
+    color: #2c2c2c;
+    line-height: 1.5;
 }
 
 /* ===== ADMIN CONTAINER ===== */
@@ -20,28 +22,40 @@ body {
 /* ===== HAMBURGER MENU BUTTON ===== */
 .hamburger {
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 10px;
+    left: 12px;
     z-index: 1001;
-    background: #c9a84c;
-    border: none;
-    font-size: 20px;
+    background: #ffffff;
+    border: 1px solid #e0d6cc;
+    font-size: 16px;
     cursor: pointer;
     padding: 6px 10px;
-    border-radius: 5px;
-    color: #1a1208;
-    transition: 0.3s;
+    border-radius: 6px;
+    color: #4a3b2c;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .hamburger:hover {
-    background: #b8922e;
+    background: #f0ebe3;
+    border-color: #c9a84c;
 }
 
-/* ===== SIDEBAR - HIDDEN BY DEFAULT ===== */
+/* Sidebar Logo */
+.sidebar-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 16px;
+    border: 2px solid #c9a84c;
+}
+
+/* ===== SIDEBAR ===== */
 .sidebar {
-    width: 260px;
-    background: linear-gradient(180deg, #1a1208 0%, #2d1f0e 100%);
-    color: #f5efe0;
+    width: 280px;
+    background: #1a1612;
+    color: #e8e0d5;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -50,6 +64,7 @@ body {
     transition: transform 0.3s ease;
     transform: translateX(-100%);
     z-index: 1000;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.1);
 }
 
 /* ===== SIDEBAR OPEN STATE ===== */
@@ -59,48 +74,56 @@ body {
 
 /* ===== SIDEBAR BRAND ===== */
 .sidebar-brand {
-    padding: 30px 20px;
+    padding: 32px 24px;
     border-bottom: 1px solid #c9a84c;
     text-align: center;
 }
 
 .sidebar-brand h2 {
     color: #c9a84c;
-    font-size: 22px;
-    margin-bottom: 5px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    font-family: 'Georgia', serif;
 }
 
 .sidebar-brand p {
-    font-size: 12px;
-    color: #b8a88a;
+    font-size: 11px;
+    color: #8a7a6a;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* ===== SIDEBAR NAV ===== */
 .sidebar-nav {
     flex: 1;
-    padding: 20px 15px;
+    padding: 30px 20px;
 }
 
 .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 15px;
-    color: #f5efe0;
+    display: block;
+    padding: 12px 20px;
+    color: #d4ccbf;
     text-decoration: none;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    transition: all 0.3s;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    margin-bottom: 4px;
 }
 
 .nav-link:hover {
-    background: rgba(201, 168, 76, 0.2);
+    background: rgba(201, 168, 76, 0.1);
     color: #c9a84c;
+    border-left-color: #c9a84c;
 }
 
 .nav-link.active {
-    background: #c9a84c;
-    color: #1a1208;
+    background: rgba(201, 168, 76, 0.15);
+    color: #c9a84c;
+    border-left-color: #c9a84c;
+    font-weight: 500;
 }
 
 /* ===== SIDEBAR FOOTER ===== */
@@ -112,21 +135,22 @@ body {
 }
 
 .logout-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 12px 15px;
-    background: #8b0000;
-    color: white;
+    display: block;
+    text-align: center;
+    padding: 14px 12px;
+    background: #c9a84c;
+    color: #1a1612;
     text-decoration: none;
-    border-radius: 8px;
-    transition: background 0.3s;
-    width: 100%;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: none;
 }
 
 .logout-btn:hover {
-    background: #cc0000;
+    background: #b8922e;
+    color: #ffffff;
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -135,6 +159,47 @@ body {
     margin-left: 0;
     padding: 20px 30px;
     transition: margin-left 0.3s ease;
+}
+
+.sidebar-nav .nav-link {
+    display: block;
+    padding: 12px 20px;
+    color: #d4ccbf;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    margin-bottom: 4px;
+    background: transparent;
+}
+
+.sidebar-nav .nav-link:hover {
+    background: rgba(201, 168, 76, 0.1);
+    color: #c9a84c;
+    border-left-color: #c9a84c;
+}
+
+.sidebar-nav .nav-link.active {
+    background: rgba(201, 168, 76, 0.15);
+    color: #c9a84c;
+    border-left-color: #c9a84c;
+    font-weight: 500;
+}
+
+/* Remove any default list styles */
+.sidebar-nav {
+    padding: 30px 20px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    list-style: none;
 }
 
 /* ===== TOP BAR ===== */
