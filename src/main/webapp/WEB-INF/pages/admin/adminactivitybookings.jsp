@@ -5,18 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Bookings - Heaven Bliss Hotel</title>
+    <title>Manage Activity Bookings - Heaven Bliss Hotel</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admindashboard.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminbookings.css">
 </head>
 <body>
 
-<!-- Hamburger Menu Button -->
 <button class="hamburger" onclick="toggleSidebar()">☰</button>
 
 <div class="admin-container">
     
-    <!-- Sidebar Navigation -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-brand">
             <h2>Heaven Bliss</h2>
@@ -33,12 +31,12 @@
             <a href="${pageContext.request.contextPath}/admin/users" class="nav-link">
                 Users
             </a>
-            <a href="${pageContext.request.contextPath}/admin/bookings" class="nav-link active">
+            <a href="${pageContext.request.contextPath}/admin/bookings" class="nav-link">
                 Room Bookings
             </a>
-            <a href="${pageContext.request.contextPath}/admin/activity-bookings" class="nav-link">
-			    Activity Bookings
-			</a>
+            <a href="${pageContext.request.contextPath}/admin/activity-bookings" class="nav-link active">
+                Activity Bookings
+            </a>
         </nav>
         
         <div class="sidebar-footer">
@@ -48,18 +46,15 @@
         </div>
     </div>
     
-    <!-- Main Content -->
     <div class="main-content">
         
-        <!-- Header -->
         <div class="top-bar">
-            <h1>Manage Bookings</h1>
+            <h1>Manage Activity Bookings</h1>
             <div class="admin-welcome">
                 Welcome, <strong>${sessionScope.userName}</strong>
             </div>
         </div>
         
-        <!-- Statistics Cards -->
         <div class="stats-cards">
             <div class="stat-card">
                 <div class="stat-info">
@@ -93,24 +88,22 @@
             </div>
         </div>
         
-        <!-- Filter Tabs -->
         <div class="filter-tabs">
-            <a href="${pageContext.request.contextPath}/admin/bookings?filter=all" 
+            <a href="${pageContext.request.contextPath}/admin/activity-bookings?filter=all" 
                class="filter-tab ${currentFilter == 'all' ? 'active' : ''}">All Bookings</a>
-            <a href="${pageContext.request.contextPath}/admin/bookings?filter=pending" 
+            <a href="${pageContext.request.contextPath}/admin/activity-bookings?filter=pending" 
                class="filter-tab ${currentFilter == 'pending' ? 'active' : ''}">Pending</a>
-            <a href="${pageContext.request.contextPath}/admin/bookings?filter=confirmed" 
+            <a href="${pageContext.request.contextPath}/admin/activity-bookings?filter=confirmed" 
                class="filter-tab ${currentFilter == 'confirmed' ? 'active' : ''}">Confirmed</a>
-            <a href="${pageContext.request.contextPath}/admin/bookings?filter=completed" 
+            <a href="${pageContext.request.contextPath}/admin/activity-bookings?filter=completed" 
                class="filter-tab ${currentFilter == 'completed' ? 'active' : ''}">Completed</a>
-            <a href="${pageContext.request.contextPath}/admin/bookings?filter=cancelled" 
+            <a href="${pageContext.request.contextPath}/admin/activity-bookings?filter=cancelled" 
                class="filter-tab ${currentFilter == 'cancelled' ? 'active' : ''}">Cancelled</a>
         </div>
         
-        <!-- Bookings Table -->
         <div class="table-container">
             <div class="table-header">
-                <h2>📋 All Bookings</h2>
+                <h2>All Activity Bookings</h2>
             </div>
             
             <table class="data-table">
@@ -118,10 +111,10 @@
                     <tr>
                         <th>ID</th>
                         <th>Guest</th>
-                        <th>Room</th>
-                        <th>Check In</th>
-                        <th>Check Out</th>
-                        <th>Nights</th>
+                        <th>Activity</th>
+                        <th>Booking Date</th>
+                        <th>Guests</th>
+                        <th>Duration</th>
                         <th>Total</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -135,17 +128,15 @@
                                     <td>${booking.booking_id}</td>
                                     <td>
                                         <strong>${booking.full_name}</strong><br>
-                                        <small>${booking.email}</small><br>
-                                        <small>${booking.phone}</small>
+                                        <small>${booking.email}</small>
                                     </td>
                                     <td>
-                                        Room ${booking.room_number}<br>
-                                        <small>${booking.room_type}</small><br>
-                                        <small>रु ${booking.price_per_night}/night</small>
+                                        ${booking.activity_name}<br>
+                                        <small>रु ${booking.price}/person</small>
                                     </td>
-                                    <td>${booking.check_in_date}</td>
-                                    <td>${booking.check_out_date}</td>
-                                    <td>${booking.nights}</td>
+                                    <td>${booking.booking_date}</td>
+                                    <td>${booking.guest_count}</td>
+                                    <td>${booking.duration}</td>
                                     <td>रु ${booking.total_price}</td>
                                     <td>
                                         <span class="status ${booking.status}">
@@ -154,7 +145,7 @@
                                     </td>
                                     <td>
                                         <div class="action-buttons">
-                                            <form action="${pageContext.request.contextPath}/admin/bookings" method="post" style="display: inline;">
+                                            <form action="${pageContext.request.contextPath}/admin/activity-bookings" method="post" style="display: inline;">
                                                 <input type="hidden" name="action" value="updateStatus">
                                                 <input type="hidden" name="bookingId" value="${booking.booking_id}">
                                                 <select name="status" onchange="this.form.submit()" class="status-select">
@@ -164,7 +155,7 @@
                                                     <option value="cancelled" ${booking.status == 'cancelled' ? 'selected' : ''}>Cancelled</option>
                                                 </select>
                                             </form>
-                                            <a href="${pageContext.request.contextPath}/admin/bookings?action=delete&bookingId=${booking.booking_id}" 
+                                            <a href="${pageContext.request.contextPath}/admin/activity-bookings?action=delete&bookingId=${booking.booking_id}" 
                                                class="btn-delete" 
                                                onclick="return confirm('Are you sure you want to delete this booking?')">Delete</a>
                                         </div>
@@ -174,7 +165,7 @@
                         </c:when>
                         <c:otherwise>
                             <tr>
-                                <td colspan="9" style="text-align: center;">No bookings found</td>
+                                <td colspan="9" style="text-align: center;">No activity bookings found</td>
                             </tr>
                         </c:otherwise>
                     </c:choose>

@@ -34,8 +34,11 @@
                 Users
             </a>
             <a href="${pageContext.request.contextPath}/admin/bookings" class="nav-link">
-                Bookings
+                Room Bookings
             </a>
+            <a href="${pageContext.request.contextPath}/admin/activity-bookings" class="nav-link">
+			    Activity Bookings
+			</a>
         </nav>
         
         <div class="sidebar-footer">

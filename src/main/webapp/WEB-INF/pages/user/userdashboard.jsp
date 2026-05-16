@@ -33,6 +33,9 @@
             <a href="${pageContext.request.contextPath}/user/bookings" class="nav-link">
                 My Bookings
             </a>
+            <a href="${pageContext.request.contextPath}/user/activities" class="nav-link">
+			    My Activities
+			</a>
             <a href="${pageContext.request.contextPath}/user/profile" class="nav-link">
                 My Profile
             </a>

@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Bookings - Heaven Bliss Hotel</title>
+    <title>My Activities - Heaven Bliss Hotel</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userdashboard.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mybookings.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myactivities.css">
 </head>
 <body>
 
@@ -19,34 +19,34 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-		    <img src="${pageContext.request.contextPath}/images/logo.png" alt="Heaven Bliss Logo" class="sidebar-logo">
-		    <h2>Heaven Bliss</h2>
-		    <p>Member Portal</p>
-		</div>
+            <img src="${pageContext.request.contextPath}/images/logo.png" alt="Heaven Bliss Logo" class="sidebar-logo">
+            <h2>Heaven Bliss</h2>
+            <p>Member Portal</p>
+        </div>
         
         <nav class="sidebar-nav">
-		    <a href="${pageContext.request.contextPath}/user/dashboard" class="nav-link">
-		        Dashboard
-		    </a>
-		    <a href="${pageContext.request.contextPath}/user/rooms" class="nav-link">
-		        Browse Rooms
-		    </a>
-		    <a href="${pageContext.request.contextPath}/user/bookings" class="nav-link active">
-		        My Bookings
-		    </a>
-		    <a href="${pageContext.request.contextPath}/user/activities" class="nav-link">
-			    My Activities
-			</a>
-		    <a href="${pageContext.request.contextPath}/user/profile" class="nav-link">
-		        My Profile
-		    </a>
-		</nav>
+            <a href="${pageContext.request.contextPath}/user/dashboard" class="nav-link">
+                Dashboard
+            </a>
+            <a href="${pageContext.request.contextPath}/user/rooms" class="nav-link">
+                Browse Rooms
+            </a>
+            <a href="${pageContext.request.contextPath}/user/bookings" class="nav-link">
+                My Bookings
+            </a>
+            <a href="${pageContext.request.contextPath}/user/activities" class="nav-link active">
+                My Activities
+            </a>
+            <a href="${pageContext.request.contextPath}/user/profile" class="nav-link">
+                My Profile
+            </a>
+        </nav>
         
         <div class="sidebar-footer">
-		    <a href="${pageContext.request.contextPath}/" class="logout-btn">
-		        ← Back to Home
-		    </a>
-		</div>
+            <a href="${pageContext.request.contextPath}/home" class="logout-btn">
+                ← Back to Home
+            </a>
+        </div>
     </div>
     
     <!-- Main Content -->
@@ -55,35 +55,35 @@
         <!-- Header -->
         <div class="welcome-header">
             <div>
-                <h1>My Bookings</h1>
-                <p>View and manage your reservations</p>
+                <h1>My Activities</h1>
+                <p>View and manage your activity reservations</p>
             </div>
         </div>
         
         <!-- Statistics -->
         <div class="stats-row">
-            <div class="stat-badge">📋 Total: <span>${totalBookings}</span></div>
-            <div class="stat-badge">⏳ Upcoming: <span>${upcomingCount}</span></div>
-            <div class="stat-badge">✅ Completed: <span>${completedCount}</span></div>
-            <div class="stat-badge">❌ Cancelled: <span>${cancelledCount}</span></div>
+            <div class="stat-badge">Total: <span>${totalBookings}</span></div>
+            <div class="stat-badge">Upcoming: <span>${upcomingCount}</span></div>
+            <div class="stat-badge">Completed: <span>${completedCount}</span></div>
+            <div class="stat-badge">Cancelled: <span>${cancelledCount}</span></div>
         </div>
         
         <!-- Filter Tabs -->
         <div class="filter-tabs">
-            <a href="${pageContext.request.contextPath}/user/bookings?filter=all" 
-               class="filter-tab ${currentFilter == 'all' ? 'active' : ''}">All Bookings</a>
-            <a href="${pageContext.request.contextPath}/user/bookings?filter=upcoming" 
+            <a href="${pageContext.request.contextPath}/user/activities?filter=all" 
+               class="filter-tab ${currentFilter == 'all' ? 'active' : ''}">All Activities</a>
+            <a href="${pageContext.request.contextPath}/user/activities?filter=upcoming" 
                class="filter-tab ${currentFilter == 'upcoming' ? 'active' : ''}">Upcoming</a>
-            <a href="${pageContext.request.contextPath}/user/bookings?filter=completed" 
+            <a href="${pageContext.request.contextPath}/user/activities?filter=completed" 
                class="filter-tab ${currentFilter == 'completed' ? 'active' : ''}">Completed</a>
-            <a href="${pageContext.request.contextPath}/user/bookings?filter=cancelled" 
+            <a href="${pageContext.request.contextPath}/user/activities?filter=cancelled" 
                class="filter-tab ${currentFilter == 'cancelled' ? 'active' : ''}">Cancelled</a>
         </div>
         
-        <!-- Bookings List -->
+        <!-- Activities Bookings List -->
         <div class="section">
             <div class="section-header">
-                <h2>Your Reservations</h2>
+                <h2>Your Activity Reservations</h2>
             </div>
             
             <div class="bookings-list">
@@ -95,17 +95,14 @@
                                     ${booking.status}
                                 </div>
                                 <div class="booking-details">
-                                    <h3>Room ${booking.room_number} - ${booking.room_type}</h3>
+                                    <h3>${booking.activity_name}</h3>
                                     <div class="booking-dates">
-                                        <span>Check In: ${booking.check_in_date}</span>
-                                        <span>Check Out: ${booking.check_out_date}</span>
-                                    </div>
-                                    <div class="nights-info">
-                                         ${booking.nights} nights at रु ${booking.price_per_night} per night
+                                        <span>Booking Date: ${booking.booking_date}</span>
+                                        <span>Duration: ${booking.duration}</span>
                                     </div>
                                     <div class="booking-info">
                                         <span>Guests: ${booking.guest_count}</span>
-                                        <span>Total Paid: रु ${booking.total_price}</span>
+                                        <span>Total: रु ${booking.total_price}</span>
                                     </div>
                                     <c:if test="${not empty booking.special_requests}">
                                         <div class="special-requests">
@@ -115,8 +112,8 @@
                                 </div>
                                 <div class="booking-actions">
                                     <c:if test="${booking.status == 'pending' or booking.status == 'confirmed'}">
-                                        <form action="${pageContext.request.contextPath}/user/bookings" method="post" 
-                                              onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                                        <form action="${pageContext.request.contextPath}/user/activities" method="post" 
+                                              onsubmit="return confirm('Are you sure you want to cancel this activity booking?');">
                                             <input type="hidden" name="action" value="cancel">
                                             <input type="hidden" name="bookingId" value="${booking.booking_id}">
                                             <button type="submit" class="cancel-btn">Cancel Booking</button>
@@ -126,7 +123,7 @@
                                         <button class="cancel-btn" disabled style="background:#ccc;">Already Cancelled</button>
                                     </c:if>
                                     <c:if test="${booking.status == 'completed'}">
-                                        <button class="cancel-btn" disabled style="background:#ccc;">Stay Completed</button>
+                                        <button class="cancel-btn" disabled style="background:#ccc;">Activity Completed</button>
                                     </c:if>
                                 </div>
                             </div>
@@ -134,8 +131,8 @@
                     </c:when>
                     <c:otherwise>
                         <div class="empty-state">
-                            <p>No bookings found.</p>
-                            <a href="${pageContext.request.contextPath}/user/rooms">Browse available rooms →</a>
+                            <p>No activity bookings found.</p>
+                            <a href="${pageContext.request.contextPath}/activities">Browse available activities →</a>
                         </div>
                     </c:otherwise>
                 </c:choose>
@@ -151,7 +148,6 @@
         var hamburger = document.querySelector('.hamburger');
         sidebar.classList.toggle('open');
         
-        // Hide hamburger icon when sidebar is open
         if (sidebar.classList.contains('open')) {
             hamburger.style.display = 'none';
         } else {
@@ -159,19 +155,17 @@
         }
     }
     
-    // Close sidebar when clicking outside
     document.addEventListener('click', function(event) {
         var sidebar = document.getElementById('sidebar');
         var hamburger = document.querySelector('.hamburger');
         if (sidebar.classList.contains('open')) {
             if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
                 sidebar.classList.remove('open');
-                hamburger.style.display = 'block';  // Show hamburger again
+                hamburger.style.display = 'block';
             }
         }
     });
     
-    // Show hamburger on page load if sidebar is closed
     window.addEventListener('load', function() {
         var sidebar = document.getElementById('sidebar');
         var hamburger = document.querySelector('.hamburger');

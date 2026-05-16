@@ -19,7 +19,7 @@ import java.util.Map;
 
 import com.heavenbliss.config.DbConfig;
 
-@WebServlet(asyncSupported = true, urlPatterns = {"/activities"})
+@WebServlet(asyncSupported = true, urlPatterns = {"/activities", "/book-activity"})
 public class ActivitiesController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -49,13 +49,48 @@ public class ActivitiesController extends HttpServlet {
         }
         
         Integer userId = (Integer) session.getAttribute("userId");
-        String action = req.getParameter("action");
         
-        if ("bookActivity".equals(action)) {
-            bookActivity(req, resp, userId);
-        } else {
-            resp.sendRedirect(req.getContextPath() + "/activities");
+        String activityIdStr = req.getParameter("activityId");
+        String activityName = req.getParameter("activityName");
+        String bookingDate = req.getParameter("bookingDate");
+        String guestCountStr = req.getParameter("guestCount");
+        String totalPriceStr = req.getParameter("totalPrice");
+        String specialRequests = req.getParameter("specialRequests");
+        
+        try {
+            int activityId = Integer.parseInt(activityIdStr);
+            int guestCount = Integer.parseInt(guestCountStr);
+            double totalPrice = Double.parseDouble(totalPriceStr);
+            
+            String sql = "INSERT INTO activity_bookings (user_id, activity_id, booking_date, guest_count, total_price, special_requests, status) VALUES (?, ?, ?, ?, ?, ?, 'pending')";
+            
+            try (Connection conn = DbConfig.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                
+                ps.setInt(1, userId);
+                ps.setInt(2, activityId);
+                ps.setString(3, bookingDate);
+                ps.setInt(4, guestCount);
+                ps.setDouble(5, totalPrice);
+                ps.setString(6, specialRequests);
+                ps.executeUpdate();
+                
+                req.setAttribute("success", "Activity booked successfully!");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            req.setAttribute("error", "Booking failed. Please try again.");
         }
+        
+        try {
+            List<Map<String, Object>> activities = getAllActivities();
+            req.setAttribute("activities", activities);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        req.getRequestDispatcher("/WEB-INF/pages/activities.jsp").forward(req, resp);
     }
     
     private List<Map<String, Object>> getAllActivities() {
@@ -82,37 +117,5 @@ public class ActivitiesController extends HttpServlet {
             e.printStackTrace();
         }
         return activities;
-    }
-    
-    private void bookActivity(HttpServletRequest req, HttpServletResponse resp, int userId)
-            throws ServletException, IOException {
-        
-        int activityId = Integer.parseInt(req.getParameter("activityId"));
-        String bookingDate = req.getParameter("bookingDate");
-        int guestCount = Integer.parseInt(req.getParameter("guestCount"));
-        double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
-        String specialRequests = req.getParameter("specialRequests");
-        
-        String sql = "INSERT INTO activity_bookings (user_id, activity_id, booking_date, guest_count, total_price, special_requests, status) VALUES (?, ?, ?, ?, ?, ?, 'pending')";
-        
-        try (Connection conn = DbConfig.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            
-            ps.setInt(1, userId);
-            ps.setInt(2, activityId);
-            ps.setString(3, bookingDate);
-            ps.setInt(4, guestCount);
-            ps.setDouble(5, totalPrice);
-            ps.setString(6, specialRequests);
-            ps.executeUpdate();
-            
-            req.setAttribute("success", "Activity booked successfully! Please proceed to payment.");
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            req.setAttribute("error", "Booking failed. Please try again.");
-        }
-        
-        req.getRequestDispatcher("/WEB-INF/pages/activities.jsp").forward(req, resp);
     }
 }

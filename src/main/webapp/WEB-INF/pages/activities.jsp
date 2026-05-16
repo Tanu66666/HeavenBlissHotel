@@ -27,19 +27,17 @@
             <a href="${pageContext.request.contextPath}/#contact">Contact</a>
         </div>
         <div class="nav-buttons">
-		    <!-- Show Login/Register when NOT logged in -->
-		    <c:choose>
-		        <c:when test="${empty sessionScope.user}">
-		            <a href="${pageContext.request.contextPath}/login" class="btn-login">Login</a>
-		            <a href="${pageContext.request.contextPath}/register" class="btn-register">Register</a>
-		        </c:when>
-		        <c:otherwise>
-		            <!-- Show Dashboard and Logout when logged in -->
-		            <a href="${pageContext.request.contextPath}/user/dashboard" class="btn-dashboard">My Account</a>
-		            <a href="${pageContext.request.contextPath}/logout" class="btn-logout">Logout</a>
-		        </c:otherwise>
-		    </c:choose>
-		</div>
+            <c:choose>
+                <c:when test="${empty sessionScope.user}">
+                    <a href="${pageContext.request.contextPath}/login" class="btn-login">Login</a>
+                    <a href="${pageContext.request.contextPath}/register" class="btn-register">Register</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/user/dashboard" class="btn-dashboard">My Account</a>
+                    <a href="${pageContext.request.contextPath}/logout" class="btn-logout">Logout</a>
+                </c:otherwise>
+            </c:choose>
+        </div>
     </div>
 </nav>
 
@@ -62,207 +60,105 @@
     
     <!-- Activities Grid -->
     <div class="activities-grid">
-        
-        <!-- Spa & Wellness Activities -->
-        <div class="activity-card" data-category="spa">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/spa.jpg" alt="Luxury Spa">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">spa</span>
-                <h3 class="activity-title">Luxury Spa Treatment</h3>
-                <p class="activity-desc">Enjoy a relaxing full-body spa treatment with hot stones, essential oils, and traditional Ayurvedic techniques. Each session is personalized by our experienced therapists to suit your needs. Finish your experience with herbal tea and fresh seasonal fruits.</p>
-                <div class="activity-meta">
-                    <span>1 hour</span>
+        <c:forEach items="${activities}" var="activity">
+            <div class="activity-card" data-category="${activity.category}">
+                <div class="activity-image">
+                    <img src="${pageContext.request.contextPath}${activity.image_path}" alt="${activity.activity_name}">
                 </div>
-                <div class="activity-price">रु 3,500 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
-        </div>
-        
-        <div class="activity-card" data-category="spa">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/jacuzee.jpg" alt="Jacuzzi">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">spa</span>
-                <h3 class="activity-title">Jacuzzi Experience</h3>
-                <p class="activity-desc">Relax in a private jacuzzi with champagne, rose petals, and beautiful open views. The warm hydro-massage jets help ease stress and calm the body. Perfect for couples, celebrations, or peaceful personal time.</p>
-                <div class="activity-meta">
-                    <span>1.5 hours</span>
+                <div class="activity-info">
+                    <span class="activity-category">${activity.category}</span>
+                    <h3 class="activity-title">${activity.activity_name}</h3>
+                    <p class="activity-desc">${activity.description}</p>
+                    <div class="activity-meta">
+                        <span>${activity.duration}</span>
+                    </div>
+                    <div class="activity-price">
+                        रु ${activity.price} <span>/ per person</span>
+                    </div>
+                    <button class="btn-book-activity" onclick="openActivityBookingModal(${activity.activity_id}, '${activity.activity_name}', ${activity.price})">
+                        Book Now →
+                    </button>
                 </div>
-                <div class="activity-price">रु 4,000 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
             </div>
+        </c:forEach>
+    </div>
+</div>
+
+<!-- Activity Booking Modal -->
+<div id="activityBookingModal" class="booking-modal">
+    <div class="booking-modal-content">
+        <div class="booking-modal-header">
+            <h3>Book Activity</h3>
+            <span class="close-booking-modal" onclick="closeActivityBookingModal()">&times;</span>
         </div>
-        
-        <div class="activity-card" data-category="spa">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/massage-room.jpg" alt="Massage">
+        <div class="booking-modal-body">
+            <div class="booking-room-summary">
+                <p><strong>Activity:</strong> <span id="modalActivityName"></span></p>
+                <p><strong>Price:</strong> रु <span id="modalActivityPrice"></span> / per person</p>
             </div>
-            <div class="activity-info">
-                <span class="activity-category">spa</span>
-                <h3 class="activity-title">Massage Therapy</h3>
-                <p class="activity-desc">Professional massage therapy by certified therapists. Choose from various techniques.</p>
-                <div class="activity-meta">
-                    <span>1 hour</span>
+            
+            <form id="activityBookingForm" method="POST" action="${pageContext.request.contextPath}/book-activity">
+                <input type="hidden" name="activityId" id="activityId">
+                <input type="hidden" name="activityName" id="activityName">
+                <input type="hidden" name="totalPrice" id="totalPrice">
+                
+                <div class="booking-form-group">
+                    <label>Booking Date</label>
+                    <input type="date" name="bookingDate" id="bookingDate" required>
                 </div>
-                <div class="activity-price">रु 3,000 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
-        </div>
-        
-        <div class="activity-card" data-category="spa">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/sauna-room.jpg" alt="Sauna">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">spa</span>
-                <h3 class="activity-title">Sauna & Steam Room</h3>
-                <p class="activity-desc">Refresh your body and mind in our Finnish sauna and eucalyptus steam room. The soothing heat helps relax muscles, cleanse the skin, and reduce stress. Fresh towels, cooling cloths, and refreshments are provided.</p>
-                <div class="activity-meta">
-                    <span>1 hour</span>
+                
+                <div class="booking-form-group">
+                    <label>Number of Guests</label>
+                    <select name="guestCount" id="guestCount" onchange="calculateActivityTotal()">
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6">6 Guests</option>
+                    </select>
                 </div>
-                <div class="activity-price">रु 2,000 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
-        </div>
-        
-        <!-- Entertainment Activities -->
-        <div class="activity-card" data-category="entertainment">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/dreamy-movie-room.jpg" alt="Movie Room">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">entertainment</span>
-                <h3 class="activity-title">Dreamy Movie Room</h3>
-                <p class="activity-desc">Enjoy a private cinema experience with a 4K screen, surround sound, and comfortable reclining seats. Watch films from our curated collection while enjoying gourmet snacks and drinks. Ideal for couples, families, or a quiet evening.</p>
-                <div class="activity-meta">
-                    <span>2 hours</span>
+                
+                <div class="booking-form-group">
+                    <label>Special Requests (Optional)</label>
+                    <textarea name="specialRequests" id="specialRequests" rows="2" placeholder="Any special requests?"></textarea>
                 </div>
-                <div class="activity-price">रु 2,500 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
-        </div>
-        
-        <div class="activity-card" data-category="entertainment">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/event-hall.jpg" alt="Event Hall">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">entertainment</span>
-                <h3 class="activity-title">Grand Event Hall</h3>
-                <p class="activity-desc">Host weddings, celebrations, and special events in our elegant grand hall. Featuring chandeliers, premium lighting, and modern sound and AV systems, the space is designed for memorable occasions. Our events team takes care of every detail.</p>
-                <div class="activity-meta">
-                    <span>4 hours</span>
+                
+                <div id="activityPriceBreakdown" style="display: none; background: #f0ebe3; padding: 10px; border-radius: 8px; margin: 12px 0; text-align: center;">
+                    <strong>रु <span id="pricePerPerson">0</span></strong> × <span id="guestCountDisplay">0</span> guests = 
+                    <strong>रु <span id="totalPriceDisplay">0</span></strong>
                 </div>
-                <div class="activity-price">रु 10,000 <span>/ per booking</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
-        </div>
-        
-        <div class="activity-card" data-category="entertainment">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/cozy-movie-room.jpg" alt="Cozy Movie Room">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">entertainment</span>
-                <h3 class="activity-title">Cozy Movie Room</h3>
-                <p class="activity-desc">A comfortable and intimate movie space perfect for small groups and family nights. Relax on plush bean bags with an HD screen and complete privacy. Simple, cozy, and enjoyable.</p>
-                <div class="activity-meta">
-                    <span>2 hours</span>
+                
+                <div class="booking-modal-footer">
+                    <button type="button" class="btn-cancel" onclick="closeActivityBookingModal()">Cancel</button>
+                    <button type="button" class="btn-confirm-booking" onclick="showConfirmationAndSubmit()">Confirm Booking →</button>
                 </div>
-                <div class="activity-price">रु 1,800 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
+            </form>
         </div>
-        
-        <!-- Dining Activities -->
-        <div class="activity-card" data-category="dining">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/food-area.jpg" alt="Fine Dining">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">dining</span>
-                <h3 class="activity-title">Fine Dining Experience</h3>
-                <p class="activity-desc">Enjoy a carefully prepared three-course meal made with fresh seasonal ingredients. From appetizers to signature desserts, every dish is crafted with care and elegance. Paired with fine wines and attentive table service.</p>
-                <div class="activity-meta">
-                    <span>2 hours</span>
-                </div>
-                <div class="activity-price">रु 3,000 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
+    </div>
+</div>
+
+<!-- Booking Confirmation Modal -->
+<div id="confirmationModal" class="booking-modal">
+    <div class="booking-modal-content" style="max-width: 400px; text-align: center;">
+        <div style="font-size: 60px; color: #2d6a4f; margin: 20px 0 10px;">✓</div>
+        <h3>Booking Confirmed!</h3>
+        <p>Your activity has been successfully booked.</p>
+        <div style="background: #f0ebe3; padding: 15px; margin: 20px; text-align: left; border-left: 3px solid #c9a84c;">
+            <p><strong>Activity:</strong> <span id="confirmActivityName"></span></p>
+            <p><strong>Date:</strong> <span id="confirmDate"></span></p>
+            <p><strong>Guests:</strong> <span id="confirmGuests"></span></p>
+            <p><strong>Total:</strong> रु <span id="confirmTotal"></span></p>
         </div>
-        
-        <div class="activity-card" data-category="dining">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/beverage-area.jpg" alt="Beverage Tasting">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">dining</span>
-                <h3 class="activity-title">Beverage Tasting</h3>
-                <p class="activity-desc">Discover a selection of premium wines, craft beers, and artisan spirits in a guided tasting experience. Enjoy expert pairings with fine cheese and charcuterie while learning about each beverage. Perfect for both beginners and enthusiasts.</p>
-                <div class="activity-meta">
-                    <span>1.5 hours</span>
-                </div>
-                <div class="activity-price">रु 2,500 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
+        <div class="booking-modal-footer" style="justify-content: center; border-top: none;">
+            <button class="btn-confirm-booking" onclick="goToMyActivities()">Go to My Activities</button>
+            <button class="btn-cancel" onclick="closeConfirmationModal()">Close</button>
         </div>
-        
-        <!-- Pool & Fitness Activities -->
-        <div class="activity-card" data-category="pool">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/indoor-swmming.jpg" alt="Indoor Pool">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">pool</span>
-                <h3 class="activity-title">Indoor Swimming Pool</h3>
-                <p class="activity-desc">Relax in our heated indoor pool with lap lanes, a quiet lounge area, and a jacuzzi corner. Fresh towels, comfortable loungers, and chilled infused water are available throughout your visit. Peaceful, private, and open daily.</p>
-                <div class="activity-meta">
-                    <span>Wwhole Day</span>
-                </div>
-                <div class="activity-price">रु 1,500 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
-        </div>
-        
-        <div class="activity-card" data-category="pool">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/outdoor-swmmingpool-view.jpg" alt="Outdoor Pool">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">pool</span>
-                <h3 class="activity-title">Outdoor Pool with View</h3>
-                <p class="activity-desc">Swim in our infinity pool surrounded by panoramic mountain and sky views. Enjoy crystal-clear water, warm sunlight, and a calm atmosphere. Poolside service, sunbeds, and private cabanas are available for your comfort.</p>
-                <div class="activity-meta">
-                    <span>Whole Day</span>
-                </div>
-                <div class="activity-price">रु 2,000 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
-        </div>
-        
-        <div class="activity-card" data-category="fitness">
-            <div class="activity-image">
-                <img src="${pageContext.request.contextPath}/images/activities/gym.jpg" alt="Gym">
-            </div>
-            <div class="activity-info">
-                <span class="activity-category">fitness</span>
-                <h3 class="activity-title">Fitness Center</h3>
-                <p class="activity-desc">Stay active in our modern fitness center with cardio machines, free weights, and stretching areas. Certified trainers are available to guide and personalize your workout. Complimentary towels, lockers, and refreshments are included for all guests.</p>
-                <div class="activity-meta">
-                    <span>Whole Day</span>
-                </div>
-                <div class="activity-price">रु 1,000 <span>/ per person</span></div>
-                <button class="btn-book-activity" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=browse'">Book Now →</button>
-            </div>
-        </div>
-        
     </div>
 </div>
 
 <script>
+    // Category Filter
     const categoryBtns = document.querySelectorAll('.category-btn');
     const activityCards = document.querySelectorAll('.activity-card');
     
@@ -280,6 +176,97 @@
             });
         });
     });
+    
+    let currentActivityPrice = 0;
+    let currentActivityName = '';
+    let currentActivityId = 0;
+    
+    function openActivityBookingModal(activityId, activityName, price) {
+        currentActivityId = activityId;
+        currentActivityName = activityName;
+        currentActivityPrice = price;
+        
+        document.getElementById('modalActivityName').innerText = activityName;
+        document.getElementById('modalActivityPrice').innerText = price;
+        document.getElementById('activityId').value = activityId;
+        document.getElementById('activityName').value = activityName;
+        
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('bookingDate').min = today;
+        document.getElementById('bookingDate').value = '';
+        document.getElementById('guestCount').value = '1';
+        document.getElementById('specialRequests').value = '';
+        document.getElementById('activityPriceBreakdown').style.display = 'none';
+        document.getElementById('totalPrice').value = '';
+        
+        document.getElementById('activityBookingModal').style.display = 'block';
+    }
+    
+    function calculateActivityTotal() {
+        const guests = parseInt(document.getElementById('guestCount').value);
+        const total = guests * currentActivityPrice;
+        
+        document.getElementById('pricePerPerson').innerText = currentActivityPrice;
+        document.getElementById('guestCountDisplay').innerText = guests;
+        document.getElementById('totalPriceDisplay').innerText = total;
+        document.getElementById('totalPrice').value = total;
+        document.getElementById('activityPriceBreakdown').style.display = 'block';
+    }
+    
+    function closeActivityBookingModal() {
+        document.getElementById('activityBookingModal').style.display = 'none';
+    }
+    
+    function closeConfirmationModal() {
+        document.getElementById('confirmationModal').style.display = 'none';
+    }
+    
+    function goToMyActivities() {
+        // Submit the form to save booking, then go to My Activities
+        document.getElementById('activityBookingForm').submit();
+    }
+    
+    function showConfirmationAndSubmit() {
+        // Get form values
+        const bookingDate = document.getElementById('bookingDate').value;
+        const guests = document.getElementById('guestCount').value;
+        
+        // Validate
+        if (!bookingDate) {
+            alert('Please select a booking date');
+            return;
+        }
+        
+        // Calculate total if not calculated yet
+        if (!document.getElementById('totalPrice').value || document.getElementById('totalPrice').value === '0') {
+            calculateActivityTotal();
+        }
+        
+        const total = document.getElementById('totalPrice').value;
+        
+        if (!total || total === '0') {
+            alert('Please select number of guests');
+            return;
+        }
+        
+        // Show confirmation modal with booking details
+        document.getElementById('confirmActivityName').innerText = currentActivityName;
+        document.getElementById('confirmDate').innerText = bookingDate;
+        document.getElementById('confirmGuests').innerText = guests;
+        document.getElementById('confirmTotal').innerText = total;
+        
+        // Close booking modal and show confirmation
+        closeActivityBookingModal();
+        document.getElementById('confirmationModal').style.display = 'block';
+        
+        // No auto-submit - user clicks "Go to My Activities" to submit
+    }
+    
+    window.onclick = function(event) {
+        if (event.target.classList.contains('booking-modal')) {
+            event.target.style.display = 'none';
+        }
+    }
 </script>
 
 <!-- Footer -->
