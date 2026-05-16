@@ -185,9 +185,9 @@
                     </div>
                 </div>
                 
-                <button class="modal-book-btn" onclick="window.location.href='${pageContext.request.contextPath}/login?redirect=packages'">
-                    Book This Package →
-                </button>
+                <button class="modal-book-btn" onclick="showPackageBookingAlert('${packageModalTitle}', '${packageModalPrice}')">
+				    Book This Package →
+				</button>
                 <div class="booking-note">
                     Advance payment required. Terms and conditions apply.
                 </div>
@@ -468,6 +468,55 @@
     function resetTimer() {
         stopSlideshow();
         startSlideshow();
+    }
+    
+    function showPackageBookingAlert(packageName, packagePrice) {
+        const modalHtml = `
+            <div id="packageContactModal" class="booking-modal" style="display: block;">
+                <div class="booking-modal-content" style="max-width: 400px; text-align: center;">
+                    <div class="booking-modal-header">
+                        <h3>Package Booking</h3>
+                        <span class="close-booking-modal" onclick="closePackageContactModal()">&times;</span>
+                    </div>
+                    <div class="booking-modal-body">
+                        <div style="margin: 15px 0;">
+                            <h4>${packageName}</h4>
+                            <p style="font-size: 18px; color: #c9a84c; margin: 10px 0;">${packagePrice}</p>
+                            <p style="margin: 10px 0; color: #555;">For package bookings, please contact our reservation team:</p>
+                            <div style="background: #f0ebe3; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                                <p><strong>Phone:</strong> +977 9800000000</p>
+                                <p><strong>Email:</strong> reservations@heavenbliss.com</p>
+                            </div>
+                            <p style="font-size: 12px; color: #888;">Our team will help you customize your package and confirm availability.</p>
+                        </div>
+                    </div>
+                    <div class="booking-modal-footer" style="justify-content: center;">
+                        <button class="btn-confirm-booking" onclick="closePackageContactModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const existingModal = document.getElementById('packageContactModal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+        
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('packageContactModal');
+            if (event.target === modal) {
+                closePackageContactModal();
+            }
+        }
+    }
+
+    function closePackageContactModal() {
+        const modal = document.getElementById('packageContactModal');
+        if (modal) {
+            modal.remove();
+        }
     }
 </script>
 
